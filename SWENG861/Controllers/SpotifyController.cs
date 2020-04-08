@@ -77,7 +77,6 @@ namespace SWENG861.Controllers
                 // Write error to the console and throw an exception to return a 500 error
                 var message = "Exception Occurred: " + Ex.Message;
                 Console.WriteLine(message);
-                throw new Exception(message);
             }
 
             // Return null by default
