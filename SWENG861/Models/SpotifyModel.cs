@@ -30,8 +30,7 @@ namespace SWENG861.Models
                 {
                     { "grant_type", "client_credentials" }
                 };
-                var authHeader = Convert.ToBase64String(Encoding.Default.GetBytes($"{ClientID}:{ClientSecret}"));
-                webClient.Headers.Add(HttpRequestHeader.Authorization, "Basic " + authHeader);
+                webClient.Headers.Add(HttpRequestHeader.Authorization, "Basic " + Convert.ToBase64String(Encoding.Default.GetBytes($"{ClientID}:{ClientSecret}")));
                 var TokenJObject = JObject.Parse(Encoding.UTF8.GetString(webClient.UploadValues("https://accounts.spotify.com/api/token", postparams)));
                 Token = new Token
                 {

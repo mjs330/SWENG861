@@ -19,16 +19,8 @@ namespace SWENG861.Controllers
         {
             try
             {
-                // Initialize Spotify WebAPI
-                var creds = new SpotifyCredentials();
-                var api = new SpotifyWebAPI()
-                {
-                    AccessToken = creds.Token.AccessToken,
-                    TokenType = creds.Token.TokenType
-                };
-
                 // Get and return search results
-                return JsonConvert.SerializeObject((api.SearchItemsEscaped(id, SearchType.Artist)).Artists);
+                return JsonConvert.SerializeObject(GetSpotifyWebAPI().SearchItemsEscaped(id, SearchType.Artist).Artists);
             }
             catch (Exception Ex)
             {
@@ -46,16 +38,8 @@ namespace SWENG861.Controllers
         {
             try
             {
-                // Initialize Spotify WebAPI
-                var creds = new SpotifyCredentials();
-                var api = new SpotifyWebAPI()
-                {
-                    AccessToken = creds.Token.AccessToken,
-                    TokenType = creds.Token.TokenType
-                };
-
                 // Get and return search results
-                return JsonConvert.SerializeObject((api.SearchItemsEscaped(id, SearchType.Track)).Tracks);
+                return JsonConvert.SerializeObject(GetSpotifyWebAPI().SearchItemsEscaped(id, SearchType.Track).Tracks);
             }
             catch (Exception Ex)
             {
@@ -68,6 +52,23 @@ namespace SWENG861.Controllers
             return null;
         }
 
-
+        private SpotifyWebAPI GetSpotifyWebAPI()
+        {
+            try
+            {
+                // Initialize Spotify WebAPI
+                var creds = new SpotifyCredentials();
+                return new SpotifyWebAPI()
+                {
+                    AccessToken = creds.Token.AccessToken,
+                    TokenType = creds.Token.TokenType
+                };
+            }
+            catch (Exception Ex)
+            {
+                // Throw a new exception to bubble up
+                throw new Exception("Exception Occurred: " + Ex.Message);
+            }
+        }
     }
 }
