@@ -18,20 +18,12 @@ namespace SWENG861.Controllers
         {
             try
             {
-                // Initialize Spotify Client
-                var client = new SpotifyClient();
-
-                // Check if client token was populated
-                if (client.Token == null)
-                {
-                    throw new Exception("Spotify client token is null.");
-                }
-
                 // Initialize Spotify WebAPI
+                var creds = new SpotifyCredentials();
                 var api = new SpotifyWebAPI()
                 {
-                    AccessToken = client.Token.AccessToken,
-                    TokenType = client.Token.TokenType
+                    AccessToken = creds.Token.AccessToken,
+                    TokenType = creds.Token.TokenType
                 };
 
                 // Get and return search results
@@ -39,7 +31,7 @@ namespace SWENG861.Controllers
             }
             catch (Exception Ex)
             {
-                // Write error to the console and throw an exception to return a 500 error
+                // Write error to the console
                 var message = "Exception Occurred: " + Ex.Message;
                 Console.WriteLine(message);
             }
@@ -53,28 +45,11 @@ namespace SWENG861.Controllers
         {
             try
             {
-                // Initialize Spotify Client
-                var client = new SpotifyClient();
-
-                // Check if client token was populated
-                if (client.Token == null)
-                {
-                    throw new Exception("Spotify client token is null.");
-                }
-
-                // Initialize Spotify WebAPI
-                var api = new SpotifyWebAPI()
-                {
-                    AccessToken = client.Token.AccessToken,
-                    TokenType = client.Token.TokenType
-                };
-
-                // Get and return search results
-                return (api.SearchItemsEscaped(id, SearchType.Track)).Tracks;
+            
             }
             catch (Exception Ex)
             {
-                // Write error to the console and throw an exception to return a 500 error
+                // Write error to the console
                 var message = "Exception Occurred: " + Ex.Message;
                 Console.WriteLine(message);
             }
@@ -82,5 +57,7 @@ namespace SWENG861.Controllers
             // Return null by default
             return null;
         }
+
+
     }
 }
