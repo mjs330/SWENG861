@@ -20,7 +20,7 @@ namespace SWENG861.Controllers
             try
             {
                 // Get and return search results
-                return JsonConvert.SerializeObject(GetSpotifyWebAPI().SearchItemsEscaped(id, SearchType.Artist).Artists);
+                return JsonConvert.SerializeObject(GetSpotifyWebAPIWithToken().SearchItemsEscaped(id, SearchType.Artist).Artists);
             }
             catch (Exception Ex)
             {
@@ -39,7 +39,7 @@ namespace SWENG861.Controllers
             try
             {
                 // Get and return search results
-                return JsonConvert.SerializeObject(GetSpotifyWebAPI().SearchItemsEscaped(id, SearchType.Track).Tracks);
+                return JsonConvert.SerializeObject(GetSpotifyWebAPIWithToken().SearchItemsEscaped(id, SearchType.Track).Tracks);
             }
             catch (Exception Ex)
             {
@@ -52,7 +52,7 @@ namespace SWENG861.Controllers
             return null;
         }
 
-        private SpotifyWebAPI GetSpotifyWebAPI()
+        private SpotifyWebAPI GetSpotifyWebAPIWithToken()
         {
             try
             {

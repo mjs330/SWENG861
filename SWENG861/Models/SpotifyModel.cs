@@ -17,6 +17,7 @@ namespace SWENG861.Models
         // Store Spotify client ID and client secret
         private static readonly string ClientID = "***REMOVED***";
         private static readonly string ClientSecret = "***REMOVED***";
+
         public Token Token = null;
 
         // Get Spotify token when class is instantiated
