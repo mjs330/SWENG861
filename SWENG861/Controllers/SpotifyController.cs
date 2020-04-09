@@ -8,13 +8,14 @@ using SWENG861.Models;
 using SpotifyAPI.Web;
 using SpotifyAPI.Web.Enums;
 using SpotifyAPI.Web.Models;
+using Newtonsoft.Json;
 
 namespace SWENG861.Controllers
 {
     public class SpotifyController : ApiController
     {
         [HttpGet]
-        public Paging<FullArtist> SearchArtist(string id)
+        public object SearchArtist(string id)
         {
             try
             {
@@ -27,7 +28,7 @@ namespace SWENG861.Controllers
                 };
 
                 // Get and return search results
-                return (api.SearchItemsEscaped(id, SearchType.Artist)).Artists;
+                return JsonConvert.SerializeObject((api.SearchItemsEscaped(id, SearchType.Artist)).Artists);
             }
             catch (Exception Ex)
             {
@@ -41,11 +42,20 @@ namespace SWENG861.Controllers
         }
 
         [HttpGet]
-        public Paging<FullTrack> SearchTitle(string id)
+        public object SearchTitle(string id)
         {
             try
             {
-            
+                // Initialize Spotify WebAPI
+                var creds = new SpotifyCredentials();
+                var api = new SpotifyWebAPI()
+                {
+                    AccessToken = creds.Token.AccessToken,
+                    TokenType = creds.Token.TokenType
+                };
+
+                // Get and return search results
+                return JsonConvert.SerializeObject((api.SearchItemsEscaped(id, SearchType.Track)).Tracks);
             }
             catch (Exception Ex)
             {
