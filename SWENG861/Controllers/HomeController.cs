@@ -1,4 +1,5 @@
-﻿using System;
+﻿using SWENG861.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -8,9 +9,16 @@ namespace SWENG861.Controllers
 {
     public class HomeController : Controller
     {
-        public ActionResult Index()
+        #region Pages
+
+        public ActionResult Index(string artist = null, string title = null)
         {
-            return View();
+            var model = new SearchPageModel()
+            {
+                ArtistResults = (new SpotifyController()).SearchArtist(artist),
+                TrackResults  = (new SpotifyController()).SearchTitle(title)
+            };
+            return View("/Views/Home/Index.cshtml", model);
         }
 
         //public ActionResult About()
@@ -27,14 +35,23 @@ namespace SWENG861.Controllers
         //    return View();
         //}
 
+        public ActionResult Artist(string id)
+        {
+            return View();
+        }
+
         public ActionResult Title(string id)
         {
             return View();
         }
 
-        public ActionResult Artist(string id)
-        {
-            return View();
-        }
+        #endregion
+
+
+        #region Helper Methods
+
+        // TODO
+
+        #endregion
     }
 }

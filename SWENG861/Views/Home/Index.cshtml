@@ -1,4 +1,5 @@
-﻿@{
+﻿@model SWENG861.Models.SearchPageModel
+@{
     ViewBag.Title = "Home";
 }
 <head>
@@ -8,41 +9,80 @@
 <div class="text-center">
     <h1 class="display-4">Search</h1>
     <hr />
-    <p><a href="/api/Spotify/SearchArtist/beatles">Click here</a> to conduct a test search by artist.</p>
-    <p><a href="/api/Spotify/SearchTitle/hey jude">Click here</a> to conduct a test search by title.</p>
-</div>
-
-<div id="ArtistSearchResults" class="text-center">
-    <table id="ArtistSearchResultsTable">
-        <thead>
-            <tr>
-                <th>Artist</th>
-            </tr>
-        </thead>
-        <tbody>
-        </tbody>
-    </table>
-</div>
-
-<div id="TitleSearchResults" class="text-center">
-    <table id="TitleSearchResultsTable">
-        <thead>
-            <tr>
-                <th>Artist</th>
-                <th>Title</th>
-                <th>Album</th>
-                <th>Release Date</th>
-            </tr>
-        </thead>
-        <tbody>
-        </tbody>
-    </table>
+    <p><a href="?artist=beatles">Click here</a> to conduct a test search by artist.</p>
+    <p><a href="?title=hey jude">Click here</a> to conduct a test search by title.</p>
 </div>
 
 <script src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js"></script>
-<script>
-    $(document).ready(function () {
-        $("#ArtistSearchResultsTable").dataTable();
-        $("#TitleSearchResultsTable").dataTable();
-    });
-</script>
+
+@if (Model.ArtistResults != null)
+{
+    <div id="ArtistSearchResults" class="text-center">
+        <table id="ArtistSearchResultsTable">
+            <thead>
+                <tr>
+                    <th>Artist</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var result in Model.ArtistResults)
+                {
+                    <tr>
+                        <th>
+                            <a href="/Artist/@result.Id">@result.Name</a>
+                        </th>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+    <script>
+        $(document).ready(function () {
+            $("#ArtistSearchResultsTable").dataTable();
+        });
+    </script>
+}
+
+@if (Model.TrackResults != null)
+{
+    <div id="TitleSearchResults" class="text-center">
+        <table id="TitleSearchResultsTable">
+            <thead>
+                <tr>
+                    <th>Artist</th>
+                    <th>Title</th>
+                    <th>Album</th>
+                    <th>Release Date</th>
+                </tr>
+            </thead>
+            <tbody>
+            <tbody>
+                @foreach (var result in Model.TrackResults)
+                {
+                    <tr>
+                        <th>
+                            @foreach (var artist in result.Artists)
+                            {
+                                <a href="/Artist/@artist.Id">@artist.Name</a>
+                            }
+                        </th>
+                        <th>
+                            <a href="/Title/@result.Id">@result.Title</a>
+                        </th>
+                        <th>
+                            @result.Album
+                        </th>
+                        <th>
+                            @result.ReleaseDate
+                        </th>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+    <script>
+        $(document).ready(function () {
+            $("#TitleSearchResultsTable").dataTable();
+        });
+    </script>
+}
