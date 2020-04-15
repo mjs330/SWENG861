@@ -2,9 +2,6 @@
 @{
     ViewBag.Title = "Home";
 }
-<head>
-    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.20/css/jquery.dataTables.min.css">
-</head>
 
 <div class="text-center">
     <h1 class="display-4">Search</h1>
@@ -12,8 +9,6 @@
     <p><a href="?artist=beatles">Click here</a> to conduct a test search by artist.</p>
     <p><a href="?title=hey jude">Click here</a> to conduct a test search by title.</p>
 </div>
-
-<script src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js"></script>
 
 @if (Model.ArtistResults != null)
 {
@@ -36,11 +31,6 @@
             </tbody>
         </table>
     </div>
-    <script>
-        $(document).ready(function () {
-            $("#ArtistSearchResultsTable").dataTable();
-        });
-    </script>
 }
 
 @if (Model.TrackResults != null)
@@ -80,9 +70,4 @@
             </tbody>
         </table>
     </div>
-    <script>
-        $(document).ready(function () {
-            $("#TitleSearchResultsTable").dataTable();
-        });
-    </script>
 }
