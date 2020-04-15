@@ -11,13 +11,12 @@ using SpotifyAPI.Web.Models;
 
 namespace SWENG861.Controllers
 {
-    public class SpotifyController : ApiController
+    public class SpotifyController
     {
 
         #region Search Methods
 
-        [HttpGet]
-        public List<ArtistDetails> SearchArtist(string id)
+        public static List<ArtistDetails> SearchArtist(string id)
         {
             try
             {
@@ -39,8 +38,7 @@ namespace SWENG861.Controllers
             return null;
         }
 
-        [HttpGet]
-        public List<TrackDetails> SearchTitle(string id)
+        public static List<TrackDetails> SearchTitle(string id)
         {
             try
             {
@@ -70,7 +68,7 @@ namespace SWENG861.Controllers
         /// Instantiate SpotifyWebAPI with a token
         /// </summary>
         /// <returns></returns>
-        private SpotifyWebAPI GetSpotifyWebAPIWithToken()
+        private static SpotifyWebAPI GetSpotifyWebAPIWithToken()
         {
             try
             {
@@ -94,7 +92,7 @@ namespace SWENG861.Controllers
         /// </summary>
         /// <param name="results"></param>
         /// <returns></returns>
-        private List<TrackDetails> ConvertToTrackDetails(List<FullTrack> results)
+        private static List<TrackDetails> ConvertToTrackDetails(List<FullTrack> results)
         {
             try
             {
@@ -129,7 +127,7 @@ namespace SWENG861.Controllers
         /// </summary>
         /// <param name="results"></param>
         /// <returns></returns>
-        private List<ArtistDetails> ConvertToArtistDetails(List<FullArtist> results)
+        private static List<ArtistDetails> ConvertToArtistDetails(List<FullArtist> results)
         {
             try
             {
@@ -161,7 +159,7 @@ namespace SWENG861.Controllers
         /// </summary>
         /// <param name="results"></param>
         /// <returns></returns>
-        private List<ArtistDetails> ConvertToArtistDetails(List<SimpleArtist> results)
+        private static List<ArtistDetails> ConvertToArtistDetails(List<SimpleArtist> results)
         {
             try
             {

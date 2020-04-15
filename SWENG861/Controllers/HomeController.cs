@@ -15,8 +15,8 @@ namespace SWENG861.Controllers
         {
             var model = new SearchPageModel()
             {
-                ArtistResults = (new SpotifyController()).SearchArtist(artist),
-                TrackResults  = (new SpotifyController()).SearchTitle(title)
+                ArtistResults = SpotifyController.SearchArtist(artist),
+                TrackResults  = SpotifyController.SearchTitle(title)
             };
             return View("/Views/Home/Index.cshtml", model);
         }
