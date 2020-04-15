@@ -12,6 +12,30 @@ using SpotifyAPI.Web.Models;
 
 namespace SWENG861.Models
 {
+    /// <summary>
+    /// Stores results of artist searches
+    /// </summary>
+    public class ArtistResult
+    {
+        public string Id { get; set; }
+        public string Name { get; set; }
+    }
+
+    /// <summary>
+    /// Stores results of song searches
+    /// </summary>
+    public class TrackResult
+    {
+        public string Id { get; set; }
+        public List<ArtistResult> Artists { get; set; }
+        public string Title { get; set; }
+        public string Album { get; set; }
+        public string ReleaseDate { get; set; }
+    }
+
+    /// <summary>
+    /// Stores Spotify credentials with a token
+    /// </summary>
     public class SpotifyCredentials
     {
         // Store Spotify client ID and client secret
