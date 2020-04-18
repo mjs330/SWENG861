@@ -60,6 +60,11 @@ namespace SWENG861.Controllers
             return null;
         }
 
+        #endregion
+
+
+        #region Detail Methods
+
         public static ArtistDetails GetArtistDetails(string id)
         {
             try
@@ -109,6 +114,7 @@ namespace SWENG861.Controllers
 
         #endregion
 
+
         #region Helper Methods
 
         /// <summary>
@@ -155,7 +161,8 @@ namespace SWENG861.Controllers
                     Title = result.Name,
                     Album = result.Album.Name,
                     ReleaseDate = result.Album?.ReleaseDate,
-                    ImageUrls = result.Album?.Images?.Select(x => x.Url).ToList()
+                    ImageUrls = result.Album?.Images?.Select(x => x.Url).ToList(),
+                    Explicit = result.Explicit
                 };
                
             }

@@ -41,6 +41,7 @@ namespace SWENG861.Models
         public string Title { get; set; }
         public string Album { get; set; }
         public string ReleaseDate { get; set; }
+        public bool Explicit { get; set; }
     }
 
     /// <summary>
