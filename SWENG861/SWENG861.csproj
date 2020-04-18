@@ -292,7 +292,7 @@
     <Content Include="Scripts\popper-utils.min.js.map" />
     <Content Include="Scripts\popper-utils.js.map" />
     <Content Include="Views\Home\Artist.cshtml" />
-    <Content Include="Views\Home\Title.cshtml" />
+    <Content Include="Views\Home\Track.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

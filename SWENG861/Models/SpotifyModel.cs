@@ -13,32 +13,59 @@ using SpotifyAPI.Web.Models;
 namespace SWENG861.Models
 {
     /// <summary>
-    /// Stores artist details
+    /// Abstract class for details
     /// </summary>
-    public class ArtistDetails
+    public abstract class Details
     {
         public string Id { get; set; }
+        public List<string> ImageUrls { get; set; }
+    }
+
+    /// <summary>
+    /// Stores artist details
+    /// </summary>
+    public class ArtistDetails : Details
+    {
         public string Name { get; set; }
-        // TODO add more for artist page information
+        public List<string> Genres { get; set; }
+        public List<ArtistDetails> RelatedArtists { get; set; }
+        public List<TrackDetails> TopTracks { get; set; }
     }
 
     /// <summary>
     /// Stores track details
     /// </summary>
-    public class TrackDetails
+    public class TrackDetails : Details
     {
-        public string Id { get; set; }
         public List<ArtistDetails> Artists { get; set; }
         public string Title { get; set; }
         public string Album { get; set; }
         public string ReleaseDate { get; set; }
-        // TODO add more for track page information
     }
 
+    /// <summary>
+    /// Stores search results for the search page
+    /// </summary>
     public class SearchPageModel
     {
         public List<ArtistDetails> ArtistResults = null;
         public List<TrackDetails> TrackResults = null;
+    }
+
+    /// <summary>
+    /// Stores search results for the artist page
+    /// </summary>
+    public class ArtistPageModel
+    {
+        public ArtistDetails ArtistDetails = null;
+    }
+
+    /// <summary>
+    /// Stores search results for the track page
+    /// </summary>
+    public class TrackPageModel
+    {
+        public TrackDetails TrackDetails = null;
     }
 
     /// <summary>

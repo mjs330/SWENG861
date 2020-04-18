@@ -38,7 +38,7 @@ namespace SWENG861.Controllers
             return null;
         }
 
-        public static List<TrackDetails> SearchTitle(string id)
+        public static List<TrackDetails> SearchTrack(string id)
         {
             try
             {
@@ -48,6 +48,53 @@ namespace SWENG861.Controllers
 
                 // Get and return search results
                 return ConvertToTrackDetails(GetSpotifyWebAPIWithToken().SearchItemsEscaped(id, SearchType.Track).Tracks.Items);
+            }
+            catch (Exception Ex)
+            {
+                // Write error to the console
+                var message = "Exception Occurred: " + Ex.Message;
+                Console.WriteLine(message);
+            }
+
+            // Return null by default
+            return null;
+        }
+
+        public static ArtistDetails GetArtistDetails(string id)
+        {
+            try
+            {
+                // Return null if null is passed
+                if (string.IsNullOrEmpty(id))
+                    return null;
+
+                // Get and return artist details with related artists and top tracks
+                var details = ConvertToArtistDetails(GetSpotifyWebAPIWithToken().GetArtist(id));
+                details.RelatedArtists = ConvertToArtistDetails(GetSpotifyWebAPIWithToken().GetRelatedArtists(id).Artists);
+                details.TopTracks = ConvertToTrackDetails(GetSpotifyWebAPIWithToken().GetArtistsTopTracks(id, "US").Tracks);
+                return details;
+            }
+            catch (Exception Ex)
+            {
+                // Write error to the console
+                var message = "Exception Occurred: " + Ex.Message;
+                Console.WriteLine(message);
+            }
+
+            // Return null by default
+            return null;
+        }
+
+        public static TrackDetails GetTrackDetails(string id)
+        {
+            try
+            {
+                // Return null if null is passed
+                if (string.IsNullOrEmpty(id))
+                    return null;
+
+                // Get and return artist details
+                return ConvertToTrackDetails(GetSpotifyWebAPIWithToken().GetTrack(id));
             }
             catch (Exception Ex)
             {
@@ -88,6 +135,38 @@ namespace SWENG861.Controllers
         }
 
         /// <summary>
+        /// Converts FullTrack to TrackDetails
+        /// </summary>
+        /// <param name="results"></param>
+        /// <returns></returns>
+        private static TrackDetails ConvertToTrackDetails(FullTrack result)
+        {
+            try
+            {
+                // Return null if null is passed
+                if (result == null)
+                    return null;
+
+                // Convert the results
+                return new TrackDetails
+                {
+                    Id = result.Id,
+                    Artists = ConvertToArtistDetails(result.Artists),
+                    Title = result.Name,
+                    Album = result.Album.Name,
+                    ReleaseDate = result.Album?.ReleaseDate,
+                    ImageUrls = result.Album?.Images?.Select(x => x.Url).ToList()
+                };
+               
+            }
+            catch (Exception Ex)
+            {
+                // Throw a new exception to bubble up
+                throw new Exception("Exception Occurred: " + Ex.Message);
+            }
+        }
+
+        /// <summary>
         /// Converts List<FullTrack> to List<TrackDetails>
         /// </summary>
         /// <param name="results"></param>
@@ -101,19 +180,12 @@ namespace SWENG861.Controllers
                     return null;
 
                 // Convert the results
-                var convertedDetailss = new List<TrackDetails>();
+                var convertedDetails = new List<TrackDetails>();
                 foreach (var result in results)
                 {
-                    convertedDetailss.Add(new TrackDetails
-                    {
-                        Id = result.Id,
-                        Artists = ConvertToArtistDetails(result.Artists),
-                        Title = result.Name,
-                        Album = result.Album.Name,
-                        ReleaseDate = result.Album.ReleaseDate
-                    });
+                    convertedDetails.Add(ConvertToTrackDetails(result));
                 }
-                return convertedDetailss;
+                return convertedDetails;
             }
             catch (Exception Ex)
             {
@@ -123,7 +195,36 @@ namespace SWENG861.Controllers
         }
 
         /// <summary>
-        /// Converts List<FullArtist> to List<ArtistDetails> to return as search results
+        /// Converts FullArtist to ArtistDetails
+        /// </summary>
+        /// <param name="results"></param>
+        /// <returns></returns>
+        private static ArtistDetails ConvertToArtistDetails(FullArtist result)
+        {
+            try
+            {
+                // Return null if null is passed
+                if (result == null)
+                    return null;
+
+                // Convert and return the results
+                return new ArtistDetails
+                {
+                    Id = result.Id,
+                    Name = result.Name,
+                    Genres = result.Genres,
+                    ImageUrls = result.Images?.Select(x => x.Url).ToList()                
+                };
+            }
+            catch (Exception Ex)
+            {
+                // Throw a new exception to bubble up
+                throw new Exception("Exception Occurred: " + Ex.Message);
+            }
+        }
+
+        /// <summary>
+        /// Converts List<FullArtist> to List<ArtistDetails>
         /// </summary>
         /// <param name="results"></param>
         /// <returns></returns>
@@ -136,16 +237,12 @@ namespace SWENG861.Controllers
                     return null;
 
                 // Convert the results
-                var convertedDetailss = new List<ArtistDetails>();
+                var convertedDetails = new List<ArtistDetails>();
                 foreach (var result in results)
                 {
-                    convertedDetailss.Add(new ArtistDetails
-                    {
-                        Id = result.Id,
-                        Name = result.Name
-                    });
+                    convertedDetails.Add(ConvertToArtistDetails(result));
                 }
-                return convertedDetailss;
+                return convertedDetails;
             }
             catch (Exception Ex)
             {
@@ -155,7 +252,7 @@ namespace SWENG861.Controllers
         }
 
         /// <summary>
-        /// Converts List<SimpleArtist> to List<ArtistDetails> to return as search results
+        /// Converts List<SimpleArtist> to List<ArtistDetails>
         /// </summary>
         /// <param name="results"></param>
         /// <returns></returns>

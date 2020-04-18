@@ -9,14 +9,12 @@ namespace SWENG861.Controllers
 {
     public class HomeController : Controller
     {
-        #region Pages
-
         public ActionResult Index(string artist = null, string title = null)
         {
             var model = new SearchPageModel()
             {
                 ArtistResults = SpotifyController.SearchArtist(artist),
-                TrackResults  = SpotifyController.SearchTitle(title)
+                TrackResults  = SpotifyController.SearchTrack(title)
             };
             return View("/Views/Home/Index.cshtml", model);
         }
@@ -37,21 +35,20 @@ namespace SWENG861.Controllers
 
         public ActionResult Artist(string id)
         {
-            return View();
+            var model = new ArtistPageModel()
+            {
+                ArtistDetails = SpotifyController.GetArtistDetails(id)
+            };
+            return View("/Views/Home/Artist.cshtml", model);
         }
 
-        public ActionResult Title(string id)
+        public ActionResult Track(string id)
         {
-            return View();
+            var model = new TrackPageModel()
+            {
+                TrackDetails = SpotifyController.GetTrackDetails(id)
+            };
+            return View("/Views/Home/Track.cshtml", model);
         }
-
-        #endregion
-
-
-        #region Helper Methods
-
-        // TODO
-
-        #endregion
     }
 }
