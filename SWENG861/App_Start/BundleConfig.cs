@@ -20,11 +20,22 @@ namespace SWENG861
                         "~/Scripts/modernizr-*"));
 
             bundles.Add(new ScriptBundle("~/bundles/bootstrap").Include(
-                      "~/Scripts/bootstrap.js"));
+                      //"~/Scripts/bootstrap.min.js",
+                      "~/Content/styles/bootstrap-4.1.2/bootstrap.min.js",
+                      "~/Content/styles/bootstrap-4.1.2/popper.js"));
 
             bundles.Add(new StyleBundle("~/Content/css").Include(
-                      "~/Content/bootstrap.css",
+                      //"~/Content/bootstrap.css",
+                      "~/Content/styles/bootstrap-4.1.2/bootstrap.min.css",
                       "~/Content/site.css"));
+
+            bundles.Add(new StyleBundle("~/Content/colorlib").Include(
+                      "~/Content/plugins/font-awesome-4.7.0/css/font-awesome.min.css",
+                      "~/Content/plugins/OwlCarousel2-2.3.4/owl.carousel.css",
+                      "~/Content/plugins/OwlCarousel2-2.3.4/owl.theme.default.css",
+                      "~/Content/plugins/OwlCarousel2-2.3.4/animate.css",
+                      "~/Content/styles/main_styles.css",
+                      "~/Content/styles/responsive.css"));
         }
     }
 }

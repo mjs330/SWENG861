@@ -16,16 +16,33 @@ namespace SWENG861.Controllers
         /// <param name="artist"></param>
         /// <param name="title"></param>
         /// <returns></returns>
-        public ActionResult Index(string artist = null, string title = null)
+        public ActionResult Index(string artist = null, string track = null)
         {
             try
             {
-                var model = new SearchPageModel()
+                var model = new SearchPageModel();
+                ViewBag.Query = string.Empty;
+
+                // Ensure that track and artist is not searched for concurrently
+                if (!string.IsNullOrEmpty(artist) && !string.IsNullOrEmpty(track))
                 {
-                    ArtistResults = SpotifyController.SearchArtist(artist),
-                    TrackResults = SpotifyController.SearchTrack(title)
-                };
-                return View("/Views/Home/Index.cshtml", model);
+                    return View("/Views/Home/Index.cshtml", model);
+                } 
+                else
+                {
+                    // Build the search result model if artist or track is specified
+                    if (!string.IsNullOrEmpty(artist))
+                    {
+                        model.ArtistResults = SpotifyController.SearchArtist(artist);
+                        ViewBag.Query = artist;
+                    }
+                    else if (!string.IsNullOrEmpty(track))
+                    {
+                        model.TrackResults = SpotifyController.SearchTrack(track);
+                        ViewBag.Query = track;
+                    }
+                    return View("/Views/Home/Index.cshtml", model);
+                }
             }
             catch (Exception Ex)
             {
