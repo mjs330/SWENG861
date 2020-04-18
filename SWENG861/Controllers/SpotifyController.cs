@@ -16,6 +16,11 @@ namespace SWENG861.Controllers
 
         #region Search Methods
 
+        /// <summary>
+        /// Searches for an artist
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         public static List<ArtistDetails> SearchArtist(string id)
         {
             try
@@ -38,6 +43,11 @@ namespace SWENG861.Controllers
             return null;
         }
 
+        /// <summary>
+        /// Searches for a track
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         public static List<TrackDetails> SearchTrack(string id)
         {
             try
@@ -65,6 +75,11 @@ namespace SWENG861.Controllers
 
         #region Detail Methods
 
+        /// <summary>
+        /// Gets artist details by the artist's Spotify ID
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         public static ArtistDetails GetArtistDetails(string id)
         {
             try
@@ -90,6 +105,11 @@ namespace SWENG861.Controllers
             return null;
         }
 
+        /// <summary>
+        /// Gets track details by the track's Spotify ID
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         public static TrackDetails GetTrackDetails(string id)
         {
             try
@@ -118,7 +138,7 @@ namespace SWENG861.Controllers
         #region Helper Methods
 
         /// <summary>
-        /// Instantiate SpotifyWebAPI with a token
+        /// Instantiates SpotifyWebAPI with a token
         /// </summary>
         /// <returns></returns>
         private static SpotifyWebAPI GetSpotifyWebAPIWithToken()
