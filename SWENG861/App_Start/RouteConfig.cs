@@ -14,22 +14,11 @@ namespace SWENG861
             routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
 
             routes.MapRoute(
-                name: "Artist",
-                url: "Artist/{id}",
-                defaults: new { controller = "Home", action = "Artist", id = UrlParameter.Optional }
-            );
-
-            routes.MapRoute(
-                name: "Track",
-                url: "Track/{id}",
-                defaults: new { controller = "Home", action = "Track", id = UrlParameter.Optional }
-            );
-
-            routes.MapRoute(
                 name: "Default",
-                url: "{controller}/{action}/{id}",
+                url: "{action}/{id}",
                 defaults: new { controller = "Home", action = "Index", id = UrlParameter.Optional }
             );
+
         }
     }
 }
