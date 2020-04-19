@@ -22,7 +22,7 @@ namespace SWENG861.Controllers
         /// <param name="id">The string to search for among artists</param>
         /// <param name="min">Specifies whether or not the minimum amount of artist details are returned</param>
         /// <returns></returns>
-        public static List<ArtistDetails> SearchArtist(string id, bool min = true)
+        public static List<ArtistDetails> SearchArtist(string id, bool min = false)
         {
             try
             {
@@ -37,15 +37,16 @@ namespace SWENG861.Controllers
                 } 
                 else
                 {
-                    var resultIds = ConvertToArtistDetails(GetSpotifyWebAPIWithToken().SearchItemsEscaped(id, SearchType.Artist).Artists.Items);
+                    var resultsMin = ConvertToArtistDetails(GetSpotifyWebAPIWithToken().SearchItemsEscaped(id, SearchType.Artist).Artists.Items);
                     var results = new List<ArtistDetails>();
-                    foreach (var resultId in resultIds)
+                    foreach (var resultMin in resultsMin)
                     {
-                        var result = resultId;
-                        result.RelatedArtists = ConvertToArtistDetails(GetSpotifyWebAPIWithToken().GetRelatedArtists(id).Artists);
-                        result.TopTracks = ConvertToTrackDetails(GetSpotifyWebAPIWithToken().GetArtistsTopTracks(id, "US").Tracks);
+                        var result = resultMin;
+                        result.RelatedArtists = ConvertToArtistDetails(GetSpotifyWebAPIWithToken().GetRelatedArtists(result.Id).Artists);
+                        result.TopTracks = ConvertToTrackDetails(GetSpotifyWebAPIWithToken().GetArtistsTopTracks(result.Id, "US").Tracks);
                         results.Add(result);
                     }
+                    return results;
                 }
             }
             catch (Exception Ex)

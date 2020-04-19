@@ -129,11 +129,16 @@
                                             <div class="artist_info">
                                                 <div class="artist_name"><h1><a href="/Search?artist=@result.Name">@result.Name</a></h1></div>
                                                 <div class="artist_text">
-                                                    <p>@string.Join(", ", result.Genres)</p>
-                                                    @if (result.RelatedArtists != null)
+                                                    @if (result.Genres != null && result.Genres.Count > 0)
                                                     {
                                                         <p>
-                                                            Related Artists:
+                                                            <strong>Genres</strong> @string.Join(", ", result.Genres)
+                                                        </p>
+                                                    }
+                                                    @if (result.RelatedArtists != null && result.RelatedArtists.Count > 0)
+                                                    {
+                                                        <p>
+                                                            <strong>Related Artists</strong>
                                                             @foreach (var artist in result.RelatedArtists)
                                                             {
                                                                 <a href="/Search?artist=@artist.Name">@artist.Name</a>
@@ -144,13 +149,13 @@
                                                             }
                                                         </p>
                                                     }
-                                                    @if (result.TopTracks != null)
+                                                    @if (result.TopTracks != null && result.TopTracks.Count > 0)
                                                     {
                                                         <p>
-                                                            Top Tracks:
+                                                            <strong>Top Tracks</strong>
                                                             @foreach (var track in result.TopTracks)
                                                             {
-                                                                <a href="/Search?artist=@track.Title">@track.Title</a>
+                                                                <a href="/Search?track=@track.Title">@track.Title</a>
                                                                 if (track != result.TopTracks.Last())
                                                                 {
                                                                     <span>, </span>
@@ -158,7 +163,7 @@
                                                             }
                                                         </p>
                                                     }
-                                                    <p><a href="@("https://open.spotify.com/artist/" + result.Id)" target="_blank">Listen on Spotify</a></p>
+                                                    <p><a href="@("https://open.spotify.com/artist/" + result.Id)" target="_blank"><strong>Listen on Spotify</strong></a></p>
                                                 </div>
                                             </div>
 
@@ -192,7 +197,7 @@
                                                     @if (result.Artists != null)
                                                     {
                                                         <p>
-                                                            by:
+                                                            <strong>By</strong>
                                                             @foreach (var artist in result.Artists)
                                                             {
                                                                 <a href="/Search?artist=@artist.Name">@artist.Name</a>
@@ -203,8 +208,8 @@
                                                             }
                                                         </p>
                                                     }
-                                                    <p>Released @result.ReleaseDate</p>
-                                                    <p><a href="@("https://open.spotify.com/track/" + result.Id)" target="_blank">Listen on Spotify</a></p>
+                                                    <p><strong>Released</strong> @result.ReleaseDate</p>
+                                                    <p><a href="@("https://open.spotify.com/track/" + result.Id)" target="_blank"><strong>Listen on Spotify</strong></a></p>
                                                 </div>
                                             </div>
 
