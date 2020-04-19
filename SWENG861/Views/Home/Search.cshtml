@@ -79,33 +79,6 @@
 
 @if (Model.ArtistResults != null || Model.TrackResults != null)
 {
-    <!-- Search -->
-
-    <div class="search">
-        <div class="container">
-            <div class="row">
-                <div class="col">
-                    <div class="search_form_container">
-                        <form action="#" class="search_form" id="search_form">
-                            <div class="d-flex flex-md-row flex-column align-items-center justify-content-between">
-                                @if (Model.ArtistResults != null)
-                                {
-                                    <input type="text" class="search_input" id="search_artist_text" value="@ViewBag.Query" placeholder="Enter Artist" required="required">
-                                    <button class="button search_button" id="search_artist_button"><span>search artist</span></button>
-                                }
-                                @if (Model.TrackResults != null)
-                                {
-                                    <input type="text" class="search_input" id="search_track_text" value="@ViewBag.Query" placeholder="Enter Track" required="required">
-                                    <button class="button search_button" id="search_track_button"><span>search track</span></button>
-                                }
-                            </div>
-                        </form>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
     <div class="artists_container">
         <div class="container">
             <div class="row">
@@ -130,7 +103,7 @@
                                                 <div class="artist_name"><h1><a href="/Search?artist=@result.Name">@result.Name</a></h1></div>
                                                 <div class="artist_text">
                                                     <p>@string.Join(", ", result.Genres)</p>
-                                                    @*<p><a href="/Artist/@result.Id">View Artist Details</a></p>*@
+                                                    <p><a href="@("https://open.spotify.com/artist/" + result.Id)" target="_blank">Listen on Spotify</a></p>
                                                 </div>
                                             </div>
 
@@ -176,7 +149,7 @@
                                                         </p>
                                                     }
                                                     <p>@result.ReleaseDate</p>
-                                                    @*<p><a href="/Track/@result.Id">View Track Details</a></p>*@
+                                                    <p><a href="@("https://open.spotify.com/track/" + result.Id)" target="_blank">Listen on Spotify</a></p>
                                                 </div>
                                             </div>
 
@@ -187,7 +160,7 @@
                             </div>
                         }
                     }
-                    </div>
+                </div>
             </div>
         </div>
     </div>
