@@ -33,8 +33,9 @@ namespace SWENG861.Controllers
         /// </summary>
         /// <param name="artist"></param>
         /// <param name="title"></param>
+        /// <param name="min"></param>
         /// <returns></returns>
-        public ActionResult Search(string artist = null, string track = null)
+        public ActionResult Search(string artist = null, string track = null, bool min = false)
         {
             try
             {
@@ -51,7 +52,7 @@ namespace SWENG861.Controllers
                     ViewBag.Query = string.Empty;
                     if (!string.IsNullOrEmpty(artist))
                     {
-                        model.ArtistResults = SpotifyController.SearchArtist(artist);
+                        model.ArtistResults = SpotifyController.SearchArtist(artist, min);
                         ViewBag.Query = artist;
                     }
                     else if (!string.IsNullOrEmpty(track))
@@ -80,50 +81,5 @@ namespace SWENG861.Controllers
             return View();
         }
 
-        ///// <summary>
-        ///// ActionResult for the artist details page. Populates the page model with artist details based on the Spotify artist ID that's passed.
-        ///// </summary>
-        ///// <param name="id"></param>
-        ///// <returns></returns>
-        //public ActionResult Artist(string id)
-        //{
-        //    try
-        //    {
-        //        var model = new ArtistPageModel()
-        //        {
-        //            ArtistDetails = SpotifyController.GetArtistDetails(id)
-        //        };
-        //        return View("/Views/Home/Artist.cshtml", model);
-        //    }
-        //    catch (Exception Ex)
-        //    {
-        //        // Write error to the log and return a 500 error to the browser
-        //        Console.WriteLine("Exception Occurred: " + Ex.Message);
-        //        return new HttpStatusCodeResult((int)HttpStatusCode.InternalServerError);
-        //    }
-        //}
-
-        ///// <summary>
-        ///// ActionResult for the track details page. Populates the page model with artist details based on the Spotify track ID that's passed.
-        ///// </summary>
-        ///// <param name="id"></param>
-        ///// <returns></returns>
-        //public ActionResult Track(string id)
-        //{
-        //    try
-        //    {
-        //        var model = new TrackPageModel()
-        //        {
-        //            TrackDetails = SpotifyController.GetTrackDetails(id)
-        //        };
-        //        return View("/Views/Home/Track.cshtml", model);
-        //    }
-        //    catch (Exception Ex)
-        //    {
-        //        // Write error to the log and return a 500 error to the browser
-        //        Console.WriteLine("Exception Occurred: " + Ex.Message);
-        //        return new HttpStatusCodeResult((int)HttpStatusCode.InternalServerError);
-        //    }
-        //}
     }
 }

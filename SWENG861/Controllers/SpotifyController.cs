@@ -19,9 +19,10 @@ namespace SWENG861.Controllers
         /// <summary>
         /// Searches for an artist
         /// </summary>
-        /// <param name="id"></param>
+        /// <param name="id">The string to search for among artists</param>
+        /// <param name="min">Specifies whether or not the minimum amount of artist details are returned</param>
         /// <returns></returns>
-        public static List<ArtistDetails> SearchArtist(string id)
+        public static List<ArtistDetails> SearchArtist(string id, bool min = true)
         {
             try
             {
@@ -30,7 +31,22 @@ namespace SWENG861.Controllers
                     return null;
 
                 // Get and return search results
-                return ConvertToArtistDetails(GetSpotifyWebAPIWithToken().SearchItemsEscaped(id, SearchType.Artist).Artists.Items);
+                if (min)
+                {
+                    return ConvertToArtistDetails(GetSpotifyWebAPIWithToken().SearchItemsEscaped(id, SearchType.Artist).Artists.Items);
+                } 
+                else
+                {
+                    var resultIds = ConvertToArtistDetails(GetSpotifyWebAPIWithToken().SearchItemsEscaped(id, SearchType.Artist).Artists.Items);
+                    var results = new List<ArtistDetails>();
+                    foreach (var resultId in resultIds)
+                    {
+                        var result = resultId;
+                        result.RelatedArtists = ConvertToArtistDetails(GetSpotifyWebAPIWithToken().GetRelatedArtists(id).Artists);
+                        result.TopTracks = ConvertToTrackDetails(GetSpotifyWebAPIWithToken().GetArtistsTopTracks(id, "US").Tracks);
+                        results.Add(result);
+                    }
+                }
             }
             catch (Exception Ex)
             {
@@ -46,7 +62,7 @@ namespace SWENG861.Controllers
         /// <summary>
         /// Searches for a track
         /// </summary>
-        /// <param name="id"></param>
+        /// <param name="id">The string to search for among tracks</param>
         /// <returns></returns>
         public static List<TrackDetails> SearchTrack(string id)
         {
@@ -58,68 +74,6 @@ namespace SWENG861.Controllers
 
                 // Get and return search results
                 return ConvertToTrackDetails(GetSpotifyWebAPIWithToken().SearchItemsEscaped(id, SearchType.Track).Tracks.Items);
-            }
-            catch (Exception Ex)
-            {
-                // Write error to the console
-                var message = "Exception Occurred: " + Ex.Message;
-                Console.WriteLine(message);
-            }
-
-            // Return null by default
-            return null;
-        }
-
-        #endregion
-
-
-        #region Detail Methods
-
-        /// <summary>
-        /// Gets artist details by the artist's Spotify ID
-        /// </summary>
-        /// <param name="id"></param>
-        /// <returns></returns>
-        public static ArtistDetails GetArtistDetails(string id)
-        {
-            try
-            {
-                // Return null if null is passed
-                if (string.IsNullOrEmpty(id))
-                    return null;
-
-                // Get and return artist details with related artists and top tracks
-                var details = ConvertToArtistDetails(GetSpotifyWebAPIWithToken().GetArtist(id));
-                details.RelatedArtists = ConvertToArtistDetails(GetSpotifyWebAPIWithToken().GetRelatedArtists(id).Artists);
-                details.TopTracks = ConvertToTrackDetails(GetSpotifyWebAPIWithToken().GetArtistsTopTracks(id, "US").Tracks);
-                return details;
-            }
-            catch (Exception Ex)
-            {
-                // Write error to the console
-                var message = "Exception Occurred: " + Ex.Message;
-                Console.WriteLine(message);
-            }
-
-            // Return null by default
-            return null;
-        }
-
-        /// <summary>
-        /// Gets track details by the track's Spotify ID
-        /// </summary>
-        /// <param name="id"></param>
-        /// <returns></returns>
-        public static TrackDetails GetTrackDetails(string id)
-        {
-            try
-            {
-                // Return null if null is passed
-                if (string.IsNullOrEmpty(id))
-                    return null;
-
-                // Get and return artist details
-                return ConvertToTrackDetails(GetSpotifyWebAPIWithToken().GetTrack(id));
             }
             catch (Exception Ex)
             {
