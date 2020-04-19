@@ -120,7 +120,7 @@
 
                                     <!-- Artist Image -->
                                     <div class="col-lg-6">
-                                        <div class="artist_image"><img src="@result.ImageUrl" alt="@result.Name"></div>
+                                        <div class="artist_image"><img width="600" height="400" style="object-fit: cover;" src="@(!string.IsNullOrEmpty(result.ImageUrl) ? result.ImageUrl : "Content/images/artist_1.jpg")" alt="@result.Name"></div>
                                     </div>
 
                                     <!-- Artist Content -->
@@ -130,6 +130,34 @@
                                                 <div class="artist_name"><h1><a href="/Search?artist=@result.Name">@result.Name</a></h1></div>
                                                 <div class="artist_text">
                                                     <p>@string.Join(", ", result.Genres)</p>
+                                                    @if (result.RelatedArtists != null)
+                                                    {
+                                                        <p>
+                                                            Related Artists:
+                                                            @foreach (var artist in result.RelatedArtists)
+                                                            {
+                                                                <a href="/Search?artist=@artist.Name">@artist.Name</a>
+                                                                if (artist != result.RelatedArtists.Last())
+                                                                {
+                                                                    <span>, </span>
+                                                                }
+                                                            }
+                                                        </p>
+                                                    }
+                                                    @if (result.TopTracks != null)
+                                                    {
+                                                        <p>
+                                                            Top Tracks:
+                                                            @foreach (var track in result.TopTracks)
+                                                            {
+                                                                <a href="/Search?artist=@track.Title">@track.Title</a>
+                                                                if (track != result.TopTracks.Last())
+                                                                {
+                                                                    <span>, </span>
+                                                                }
+                                                            }
+                                                        </p>
+                                                    }
                                                     <p><a href="@("https://open.spotify.com/artist/" + result.Id)" target="_blank">Listen on Spotify</a></p>
                                                 </div>
                                             </div>
@@ -152,7 +180,7 @@
 
                                     <!-- Artist Image -->
                                     <div class="col-lg-6">
-                                        <div class="artist_image"><img src="@result.ImageUrl" alt="@result.Title"></div>
+                                        <div class="artist_image"><img width="600" height="400" style="object-fit: cover;" src="@(!string.IsNullOrEmpty(result.ImageUrl) ? result.ImageUrl : "Content/images/artist_1.jpg")" alt="@result.Title"></div>
                                     </div>
 
                                     <!-- Artist Content -->
@@ -175,7 +203,7 @@
                                                             }
                                                         </p>
                                                     }
-                                                    <p>@result.ReleaseDate</p>
+                                                    <p>Released @result.ReleaseDate</p>
                                                     <p><a href="@("https://open.spotify.com/track/" + result.Id)" target="_blank">Listen on Spotify</a></p>
                                                 </div>
                                             </div>
@@ -191,6 +219,7 @@
             </div>
         </div>
     </div>
+    <br /><br /><br /><br />
 }
 
 @*Get search results by artist or track*@
