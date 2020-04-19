@@ -79,6 +79,33 @@
 
 @if (Model.ArtistResults != null || Model.TrackResults != null)
 {
+    <!-- Search -->
+
+    <div class="search">
+        <div class="container">
+            <div class="row">
+                <div class="col">
+                    <div class="search_form_container">
+                        <form action="#" class="search_form" id="search_form">
+                            <div class="d-flex flex-md-row flex-column align-items-center justify-content-between">
+                                @if (Model.ArtistResults != null)
+                                {
+                                    <input type="text" class="search_input" id="search_artist_text" value="@ViewBag.Query" placeholder="Enter Artist" required="required">
+                                    <button class="button search_button" id="search_artist_button"><span>search artist</span></button>
+                                }
+                                @if (Model.TrackResults != null)
+                                {
+                                    <input type="text" class="search_input" id="search_track_text" value="@ViewBag.Query" placeholder="Enter Track" required="required">
+                                    <button class="button search_button" id="search_track_button"><span>search track</span></button>
+                                }
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <div class="artists_container">
         <div class="container">
             <div class="row">
