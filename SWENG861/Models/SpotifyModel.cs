@@ -18,7 +18,7 @@ namespace SWENG861.Models
     public abstract class Details
     {
         public string Id { get; set; }
-        public List<string> ImageUrls { get; set; }
+        public string ImageUrl { get; set; }
     }
 
     /// <summary>

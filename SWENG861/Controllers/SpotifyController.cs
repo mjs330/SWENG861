@@ -181,7 +181,7 @@ namespace SWENG861.Controllers
                     Title = result.Name,
                     Album = result.Album.Name,
                     ReleaseDate = result.Album?.ReleaseDate,
-                    ImageUrls = result.Album?.Images?.Select(x => x.Url).ToList(),
+                    ImageUrl = result.Album?.Images?.Select(x => x.Url).FirstOrDefault(),
                     Explicit = result.Explicit
                 };
                
@@ -240,7 +240,7 @@ namespace SWENG861.Controllers
                     Id = result.Id,
                     Name = result.Name,
                     Genres = result.Genres,
-                    ImageUrls = result.Images?.Select(x => x.Url).ToList()                
+                    ImageUrl = result.Images?.Select(x => x.Url).FirstOrDefault()                
                 };
             }
             catch (Exception Ex)

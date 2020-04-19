@@ -52,7 +52,7 @@ namespace SWENG861
                         "~/Content/styles/main_styles.css",
                         "~/Content/styles/artists.css",
                         "~/Content/styles/artists_responsive.css"
-              ));
+                        ));
 
 
         }

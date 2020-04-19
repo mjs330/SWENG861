@@ -63,11 +63,11 @@
                     <div class="home_content text-center">
                         @if (Model.ArtistResults != null)
                         {
-                            <div class="home_title">Artist Search</div>
+                            <div class="home_title">Search Artist</div>
                         }
                         @if (Model.TrackResults != null)
                         {
-                            <div class="home_title">Track Search</div>
+                            <div class="home_title">Search Track</div>
                         }
                     </div>
                 </div>
@@ -106,65 +106,88 @@
         </div>
     </div>
 
-    <!-- Tours -->
-
-    <div class="tours">
+    <div class="artists_container">
         <div class="container">
-            <div class="row row-lg-eq-height">
+            <div class="row">
+                <div class="col">
+                    @if (Model.ArtistResults != null)
+                    {
+                        foreach (var result in Model.ArtistResults)
+                        {
+                            <!-- Artist -->
+                            <div class="artist">
+                                <div class="row">
 
-                <!-- Tours Content -->
-                <div class="col-lg-12 order-lg-2 order-1">
-                    <div class="tours_content">
-                        <div class="section_title"><h1>Top Results For "@ViewBag.Query"</h1></div>
-                        <div class="tours_list_container">
-                            <ul class="tours_list">
+                                    <!-- Artist Image -->
+                                    <div class="col-lg-6">
+                                        <div class="artist_image"><img src="@result.ImageUrl" alt="@result.Name"></div>
+                                    </div>
 
-                                @if (Model.ArtistResults != null)
-                                {
-                                    foreach (var result in Model.ArtistResults)
-                                    {
-                                        <li class="d-flex flex-row align-items-start justify-content-start">
-                                            <div class="tour_info">
-                                                <div class="tour_date">@result.Name</div>
-                                                @if (result.Genres != null)
-                                                {
-                                                    <div class="tour_name">Genres: @String.Join(", ", result.Genres)</div>
-                                                }
-                                            </div>
-                                            <div class="button tour_button ml-auto"><a href="/Artist/@result.Id">View Artist Details</a></div>
-                                        </li>
-                                    }
-                                }
-
-                                @if (Model.TrackResults != null)
-                                {
-                                    foreach (var result in Model.TrackResults)
-                                    {
-                                        <li class="d-flex flex-row align-items-start justify-content-start">
-                                            <div class="tour_info">
-                                                <div class="tour_date">@result.Title</div>
-                                                <div class="tour_name">
-                                                    By:
-                                                    @foreach (var artist in result.Artists)
-                                                    {
-                                                        <a href="/Artist/@artist.Id">@artist.Name</a>
-                                                        if (artist != result.Artists.LastOrDefault())
-                                                        {
-                                                            <span>, </span>
-                                                        }
-                                                    }
+                                    <!-- Artist Content -->
+                                    <div class="col-lg-6 artist_col">
+                                        <div class="artist_content">
+                                            <div class="artist_info">
+                                                <div class="artist_name"><h1><a href="/Search?artist=@result.Name">@result.Name</a></h1></div>
+                                                <div class="artist_text">
+                                                    <p>@string.Join(", ", result.Genres)</p>
+                                                    @*<p><a href="/Artist/@result.Id">View Artist Details</a></p>*@
                                                 </div>
-                                                <div class="tour_location">Released: @result.ReleaseDate</div>
                                             </div>
-                                            <div class="button tour_button ml-auto"><a href="/Track/@result.Id">View Track Details</a></div>
-                                        </li>
-                                    }
-                                }
-                            </ul>
-                        </div>
-                    </div>
-                </div>
 
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+                        }
+                    }
+
+                    @if (Model.TrackResults != null)
+                    {
+                        foreach (var result in Model.TrackResults)
+                        {
+                            <!-- Artist -->
+                            <div class="artist">
+                                <div class="row">
+
+                                    <!-- Artist Image -->
+                                    <div class="col-lg-6">
+                                        <div class="artist_image"><img src="@result.ImageUrl" alt="@result.Title"></div>
+                                    </div>
+
+                                    <!-- Artist Content -->
+                                    <div class="col-lg-6 artist_col">
+                                        <div class="artist_content">
+                                            <div class="artist_info">
+                                                <div class="artist_name"><h1><a href="/Artist/@result.Id">@result.Title</a></h1></div>
+                                                <div class="artist_text">
+                                                    @if (result.Artists != null)
+                                                    {
+                                                        <p>
+                                                            by
+                                                            @foreach (var artist in result.Artists)
+                                                            {
+                                                                <a href="/Search?artist=@artist.Name">@artist.Name</a>
+                                                                if (artist != result.Artists.Last())
+                                                                {
+                                                                    <span>, </span>
+                                                                }
+                                                            }
+                                                        </p>
+                                                    }
+                                                    <p>@result.ReleaseDate</p>
+                                                    @*<p><a href="/Track/@result.Id">View Track Details</a></p>*@
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+                        }
+                    }
+                    </div>
             </div>
         </div>
     </div>
