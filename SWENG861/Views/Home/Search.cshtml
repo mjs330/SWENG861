@@ -1,0 +1,215 @@
+﻿@model SWENG861.Models.SearchPageModel
+@Styles.Render("~/Content/colorlibsearch")
+@{
+    ViewBag.Title = "Search";
+}
+
+<header class="header">
+    <div class="container">
+        <div class="row">
+            <div class="col">
+                <div class="header_content d-flex flex-row align-items-center justify-content-center">
+
+                    <!-- Logo -->
+                    <div class="logo">
+                        <a href="/" class="d-flex flex-row align-items-end justify-content-start">
+                            <span class="logo_bars d-flex flex-row align-items-end justify-content-between"><span></span><span></span><span></span><span></span><span></span></span>
+                            <span class="logo_text"></span>
+                        </a>
+                    </div>
+
+                    <!-- Main Navigation -->
+                    <nav class="main_nav">
+                        <ul class="d-flex flex-row align-items-center justify-content-start">
+                            <li class="active"><a href="/">Search</a></li>
+                            <li><a href="/Contact">Contact</a></li>
+                            <li><a href="/About">About</a></li>
+                        </ul>
+                    </nav>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+<!-- Menu -->
+
+<div class="menu">
+    <div class="menu_container">
+        <div class="menu_background"></div>
+        <div class="menu_close"><i class="fa fa-times" aria-hidden="true"></i></div>
+        <div class="menu_content d-flex flex-column align-items-center justify-content-start">
+            <nav class="menu_nav">
+                <ul class="d-flex flex-column align-items-center justify-content-start">
+                    <li class="active"><a href="/">Search</a></li>
+                    <li><a href="/Contact">Contact</a></li>
+                    <li><a href="/About">About</a></li>
+                </ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+
+<!-- Home -->
+
+<div class="home">
+    <div class="parallax_background parallax-window" data-parallax="scroll" data-image-src="Content/images/artists.jpg" data-speed="0.8"></div>
+    <div class="home_container">
+        <div class="container">
+            <div class="row">
+                <div class="col">
+                    <div class="home_content text-center">
+                        @if (Model.ArtistResults != null)
+                        {
+                            <div class="home_title">Artist Search</div>
+                        }
+                        @if (Model.TrackResults != null)
+                        {
+                            <div class="home_title">Track Search</div>
+                        }
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+@if (Model.ArtistResults != null || Model.TrackResults != null)
+{
+    <!-- Search -->
+
+    <div class="search">
+        <div class="container">
+            <div class="row">
+                <div class="col">
+                    <div class="search_form_container">
+                        <form action="#" class="search_form" id="search_form">
+                            <div class="d-flex flex-md-row flex-column align-items-center justify-content-between">
+                                @if (Model.ArtistResults != null)
+                                {
+                                    <input type="text" class="search_input" id="search_artist_text" value="@ViewBag.Query" placeholder="Enter Artist" required="required">
+                                    <button class="button search_button" id="search_artist_button"><span>search artist</span></button>
+                                }
+                                @if (Model.TrackResults != null)
+                                {
+                                    <input type="text" class="search_input" id="search_track_text" value="@ViewBag.Query" placeholder="Enter Track" required="required">
+                                    <button class="button search_button" id="search_track_button"><span>search track</span></button>
+                                }
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Tours -->
+
+    <div class="tours">
+        <div class="container">
+            <div class="row row-lg-eq-height">
+
+                <!-- Tours Content -->
+                <div class="col-lg-12 order-lg-2 order-1">
+                    <div class="tours_content">
+                        <div class="section_title"><h1>Top Results For "@ViewBag.Query"</h1></div>
+                        <div class="tours_list_container">
+                            <ul class="tours_list">
+
+                                @if (Model.ArtistResults != null)
+                                {
+                                    foreach (var result in Model.ArtistResults)
+                                    {
+                                        <li class="d-flex flex-row align-items-start justify-content-start">
+                                            <div class="tour_info">
+                                                <div class="tour_date">@result.Name</div>
+                                                @if (result.Genres != null)
+                                                {
+                                                    <div class="tour_name">Genres: @String.Join(", ", result.Genres)</div>
+                                                }
+                                            </div>
+                                            <div class="button tour_button ml-auto"><a href="/Artist/@result.Id">View Artist Details</a></div>
+                                        </li>
+                                    }
+                                }
+
+                                @if (Model.TrackResults != null)
+                                {
+                                    foreach (var result in Model.TrackResults)
+                                    {
+                                        <li class="d-flex flex-row align-items-start justify-content-start">
+                                            <div class="tour_info">
+                                                <div class="tour_date">@result.Title</div>
+                                                <div class="tour_name">
+                                                    By:
+                                                    @foreach (var artist in result.Artists)
+                                                    {
+                                                        <a href="/Artist/@artist.Id">@artist.Name</a>
+                                                        if (artist != result.Artists.LastOrDefault())
+                                                        {
+                                                            <span>, </span>
+                                                        }
+                                                    }
+                                                </div>
+                                                <div class="tour_location">Released: @result.ReleaseDate</div>
+                                            </div>
+                                            <div class="button tour_button ml-auto"><a href="/Track/@result.Id">View Track Details</a></div>
+                                        </li>
+                                    }
+                                }
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+}
+
+@*Get search results by artist or track*@
+<script>
+    $(document).ready(function () {
+        $("#search_artist_button").click(function (e) {
+            if ($("#search_artist_text").val() != "") {
+                e.preventDefault();
+                window.location.href = "/Search?artist=" + $("#search_artist_text").val();
+            }
+        });
+
+        $("#search_track_button").click(function (e) {
+            if ($("#search_track_text").val() != "") {
+                e.preventDefault();
+                window.location.href = "/Search?track=" + $("#search_track_text").val();
+            }
+        });
+
+        $("#search_artist_text").change(function () {
+            $("#search_artist_text").val(this.value);
+        });
+
+        $("#search_track_text").change(function () {
+            $("#search_track_text").val(this.value);
+        });
+    });
+</script>
+
+@*<script src="js/jquery-3.3.1.min.js"></script>
+    <script src="styles/bootstrap-4.1.2/popper.js"></script>
+    <script src="styles/bootstrap-4.1.2/bootstrap.min.js"></script>*@
+<script src="Content/plugins/greensock/TweenMax.min.js"></script>
+<script src="Content/plugins/greensock/TimelineMax.min.js"></script>
+<script src="Content/plugins/scrollmagic/ScrollMagic.min.js"></script>
+<script src="Content/plugins/greensock/animation.gsap.min.js"></script>
+<script src="Content/plugins/greensock/ScrollToPlugin.min.js"></script>
+<script src="Content/plugins/OwlCarousel2-2.3.4/owl.carousel.js"></script>
+@*<script src="plugins/jPlayer/jquery.jplayer.min.js"></script>
+    <script src="plugins/jPlayer/jplayer.playlist.min.js"></script>*@
+<script src="Content/plugins/easing/easing.js"></script>
+<script src="Content/plugins/progressbar/progressbar.min.js"></script>
+<script src="Content/plugins/parallax-js-master/parallax.min.js"></script>
+<script src="Content/plugins/scrollTo/jquery.scrollTo.min.js"></script>
+<script src="Content/js/artists.js"></script>

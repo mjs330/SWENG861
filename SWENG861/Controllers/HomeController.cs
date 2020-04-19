@@ -11,26 +11,44 @@ namespace SWENG861.Controllers
     public class HomeController : Controller
     {
         /// <summary>
-        /// ActionResult for the search page. Populates the page model with search results if artist or title parameters are passed
+        /// ActionResult for the home page.
+        /// </summary>
+        /// <returns></returns>
+        public ActionResult Index()
+        {
+            try
+            {
+                return View("/Views/Home/Index.cshtml", new SearchPageModel());
+            }
+            catch (Exception Ex)
+            {
+                // Write error to the log and return a 500 error to the browser
+                Console.WriteLine("Exception Occurred: " + Ex.Message);
+                return new HttpStatusCodeResult((int)HttpStatusCode.InternalServerError);
+            }
+        }
+
+        /// <summary>
+        /// ActionResult for the search page. Populates the page model with search results if artist or title parameters are passed.
         /// </summary>
         /// <param name="artist"></param>
         /// <param name="title"></param>
         /// <returns></returns>
-        public ActionResult Index(string artist = null, string track = null)
+        public ActionResult Search(string artist = null, string track = null)
         {
             try
             {
-                var model = new SearchPageModel();
-                ViewBag.Query = string.Empty;
-
-                // Ensure that track and artist is not searched for concurrently
-                if (!string.IsNullOrEmpty(artist) && !string.IsNullOrEmpty(track))
+                // Ensure that track and artist are not empty and are not searched for concurrently
+                if ((!string.IsNullOrEmpty(artist) && !string.IsNullOrEmpty(track))
+                    || (string.IsNullOrEmpty(artist) && string.IsNullOrEmpty(track)))
                 {
-                    return View("/Views/Home/Index.cshtml", model);
-                } 
+                    return View("/Views/Home/Index.cshtml", new SearchPageModel());
+                }
                 else
                 {
-                    // Build the search result model if artist or track is specified
+                    // Build the search result model if an artist or track is specified
+                    var model = new SearchPageModel();
+                    ViewBag.Query = string.Empty;
                     if (!string.IsNullOrEmpty(artist))
                     {
                         model.ArtistResults = SpotifyController.SearchArtist(artist);
@@ -41,7 +59,7 @@ namespace SWENG861.Controllers
                         model.TrackResults = SpotifyController.SearchTrack(track);
                         ViewBag.Query = track;
                     }
-                    return View("/Views/Home/Index.cshtml", model);
+                    return View("/Views/Home/Search.cshtml", model);
                 }
             }
             catch (Exception Ex)

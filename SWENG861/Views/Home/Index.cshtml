@@ -1,117 +1,86 @@
 ﻿@model SWENG861.Models.SearchPageModel
+@Styles.Render("~/Content/colorlib")
 @{
     ViewBag.Title = "Search";
 }
 
+<!-- Header -->
 
-<div class="super_container">
+<header class="header">
+    <div class="container">
+        <div class="row">
+            <div class="col">
+                <div class="header_content d-flex flex-row align-items-center justify-content-center">
 
-    <!-- Header -->
-
-    <header class="header">
-        <div class="container">
-            <div class="row">
-                <div class="col">
-                    <div class="header_content d-flex flex-row align-items-center justify-content-center">
-
-                        <!-- Logo -->
-                        <div class="logo">
-                            <a href="/" class="d-flex flex-row align-items-end justify-content-start">
-                                <span class="logo_bars d-flex flex-row align-items-end justify-content-between"><span></span><span></span><span></span><span></span><span></span></span>
-                                <span class="logo_text"></span>
-                            </a>
-                        </div>
-
-                        <!-- Main Navigation -->
-                        <nav class="main_nav">
-                            <ul class="d-flex flex-row align-items-center justify-content-start">
-                                <li class="active"><a href="index.html">Search</a></li>
-                                <li><a href="/Contact">Contact</a></li>
-                                <li><a href="/About">About</a></li>
-                            </ul>
-                        </nav>
-
+                    <!-- Logo -->
+                    <div class="logo">
+                        <a href="/" class="d-flex flex-row align-items-end justify-content-start">
+                            <span class="logo_bars d-flex flex-row align-items-end justify-content-between"><span></span><span></span><span></span><span></span><span></span></span>
+                            <span class="logo_text"></span>
+                        </a>
                     </div>
+
+                    <!-- Main Navigation -->
+                    <nav class="main_nav">
+                        <ul class="d-flex flex-row align-items-center justify-content-start">
+                            <li class="active"><a href="/">Search</a></li>
+                            <li><a href="/Contact">Contact</a></li>
+                            <li><a href="/About">About</a></li>
+                        </ul>
+                    </nav>
+
                 </div>
-            </div>
-        </div>
-    </header>
-
-    <!-- Menu -->
-
-    <div class="menu">
-        <div class="menu_container">
-            <div class="menu_background"></div>
-            <div class="menu_close"><i class="fa fa-times" aria-hidden="true"></i></div>
-            <div class="menu_content d-flex flex-column align-items-center justify-content-start">
-                <nav class="menu_nav">
-                    <ul class="d-flex flex-column align-items-center justify-content-start">
-                        <li class="active"><a href="index.html">Search</a></li>
-                        <li><a href="/Contact">Contact</a></li>
-                        <li><a href="/About">About</a></li>
-                    </ul>
-                </nav>
             </div>
         </div>
     </div>
+</header>
 
-    <!-- Home -->
+<!-- Menu -->
 
-    <div class="home">
+<div class="menu">
+    <div class="menu_container">
+        <div class="menu_background"></div>
+        <div class="menu_close"><i class="fa fa-times" aria-hidden="true"></i></div>
+        <div class="menu_content d-flex flex-column align-items-center justify-content-start">
+            <nav class="menu_nav">
+                <ul class="d-flex flex-column align-items-center justify-content-start">
+                    <li class="active"><a href="/">Search</a></li>
+                    <li><a href="/Contact">Contact</a></li>
+                    <li><a href="/About">About</a></li>
+                </ul>
+            </nav>
+        </div>
+    </div>
+</div>
 
-        <!-- Home Slider -->
-        <div class="home_slider_container">
-            <div class="owl-carousel owl-theme home_slider">
+<!-- Home -->
 
-                <!-- Slide -->
-                <div class="slide">
-                    <div class="background_image" style="background-image:url(Content/images/index.jpg)"></div>
-                    <div class="home_container">
-                        <div class="container">
-                            <div class="row">
-                                <div class="col">
-                                    <div class="home_content">
-                                        <div class="home_title_container text-center">
-                                            <div class="home_title islive text-center"><h1>search <span>artist</span></h1></div>
-                                        </div>
-                                        <div class="tickets_form_container">
-                                            <form action="#" class="tickets_form">
-                                                <div class="d-flex flex-md-row flex-column align-items-start justify-content-md-between justify-content-start">
-                                                    <div class="tickets_form_inputs d-flex flex-row align-items-start justify-content-between">
-                                                        <input type="text" class="tickets_form_input" id="search_artist_text" placeholder="Enter Artist" required="required">
-                                                    </div>
-                                                    <button class="tickets_form_button button" id="search_artist_button"><span>Search</span></button>
-                                                </div>
-                                            </form>
-                                        </div>
+<div class="home">
+
+    <!-- Home Slider -->
+    <div class="home_slider_container">
+        <div class="owl-carousel owl-theme home_slider">
+
+            <!-- Slide -->
+            <div class="slide">
+                <div class="background_image" style="background-image:url(Content/images/index.jpg)"></div>
+                <div class="home_container">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col">
+                                <div class="home_content">
+                                    <div class="home_title_container text-center">
+                                        <div class="home_title islive text-center"><h1>search <span>artist</span></h1></div>
                                     </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Slide -->
-                <div class="slide">
-                    <div class="background_image" style="background-image:url(Content/images/index.jpg)"></div>
-                    <div class="home_container">
-                        <div class="container">
-                            <div class="row">
-                                <div class="col">
-                                    <div class="home_content">
-                                        <div class="home_title_container text-center">
-                                            <div class="home_title islive text-center"><h1>search <span>track</span></h1></div>
-                                        </div>
-                                        <div class="tickets_form_container">
-                                            <form action="#" class="tickets_form">
-                                                <div class="d-flex flex-md-row flex-column align-items-start justify-content-md-between justify-content-start">
-                                                    <div class="tickets_form_inputs d-flex flex-row align-items-start justify-content-between">
-                                                        <input type="text" class="tickets_form_input" id="search_track_text" placeholder="Enter Track" required="required">
-                                                    </div>
-                                                    <button class="tickets_form_button button" id="search_track_button"><span>Search</span></button>
+                                    <div class="tickets_form_container">
+                                        <form action="#" class="tickets_form">
+                                            <div class="d-flex flex-md-row flex-column align-items-start justify-content-md-between justify-content-start">
+                                                <div class="tickets_form_inputs d-flex flex-row align-items-start justify-content-between">
+                                                    <input type="text" class="tickets_form_input" id="search_artist_text" placeholder="Enter Artist">
                                                 </div>
-                                            </form>
-                                        </div>
+                                                <button class="tickets_form_button button" id="search_artist_button"><span>Search Artist</span></button>
+                                            </div>
+                                        </form>
                                     </div>
                                 </div>
                             </div>
@@ -120,115 +89,39 @@
                 </div>
             </div>
 
-            <!-- Home Slider Navigation -->
-            <div class="home_slider_nav"><i class="fa fa-angle-right" aria-hidden="true"></i></div>
-
-        </div>
-    </div>
-
-    @if (Model.ArtistResults != null || Model.TrackResults != null)
-    {
-        <!-- Tours -->
-
-        <div class="tours">
-            <div class="container">
-                <div class="row row-lg-eq-height">
-
-                    <!-- Tours Content -->
-                    <div class="col-lg-12 order-lg-2 order-1">
-                        <div class="tours_content">
-                            <div class="section_title"><h1>Search Results For "@ViewBag.Query"</h1></div>
-                            <div class="tours_list_container">
-                                <ul class="tours_list">
-
-                                    @if (Model.ArtistResults != null)
-                                    {
-                                        foreach (var result in Model.ArtistResults)
-                                        {
-                                            <li class="d-flex flex-row align-items-start justify-content-start">
-                                                <div class="tour_info">
-                                                    <div class="tour_date">@result.Name</div>
-                                                    @if (result.Genres != null)
-                                                    {
-                                                        <div class="tour_name">Genres: @String.Join(", ", result.Genres)</div>
-                                                    }
+            <!-- Slide -->
+            <div class="slide">
+                <div class="background_image" style="background-image:url(Content/images/index.jpg)"></div>
+                <div class="home_container">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col">
+                                <div class="home_content">
+                                    <div class="home_title_container text-center">
+                                        <div class="home_title islive text-center"><h1>search <span>track</span></h1></div>
+                                    </div>
+                                    <div class="tickets_form_container">
+                                        <form action="#" class="tickets_form">
+                                            <div class="d-flex flex-md-row flex-column align-items-start justify-content-md-between justify-content-start">
+                                                <div class="tickets_form_inputs d-flex flex-row align-items-start justify-content-between">
+                                                    <input type="text" class="tickets_form_input" id="search_track_text" placeholder="Enter Track" required="required">
                                                 </div>
-                                                <div class="button tour_button ml-auto"><a href="/Artist/@result.Id">View Artist Details</a></div>
-                                            </li>
-                                        }
-                                    }
-
-                                    @if (Model.TrackResults != null)
-                                    {
-                                        foreach (var result in Model.TrackResults)
-                                        {
-                                            <li class="d-flex flex-row align-items-start justify-content-start">
-                                                <div class="tour_info">
-                                                    <div class="tour_date">@result.Title</div>
-                                                    <div class="tour_name">
-                                                        By:
-                                                        @foreach (var artist in result.Artists)
-                                                        {
-                                                            <a href="/Artist/@artist.Id">@artist.Name</a>
-                                                            if (artist != result.Artists.LastOrDefault())
-                                                            {
-                                                                <span>, </span>
-                                                            }
-                                                        }
-                                                    </div>
-                                                    <div class="tour_location">Released: @result.ReleaseDate</div>
-                                                </div>
-                                                <div class="button tour_button ml-auto"><a href="/Track/@result.Id">View Track Details</a></div>
-                                            </li>
-                                        }
-                                    }
-                                </ul>
+                                                <button class="tickets_form_button button" id="search_track_button"><span>Search Track</span></button>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
-
-                </div>
-            </div>
-        </div>
-    }
-
-    <!-- Footer -->
-
-    <footer class="footer">
-        <div class="background_image" style="background-image:url(Content/images/footer.jpg)"></div>
-        <div class="footer_content">
-            <div class="container">
-                <div class="row">
-                    <div class="col text-center">
-
-                        <!-- Logo -->
-                        <div class="logo">
-                            <a href="/" class="d-flex flex-row align-items-end justify-content-start">
-                                <span class="logo_bars d-flex flex-row align-items-end justify-content-between"><span></span><span></span><span></span><span></span><span></span></span>
-                                <span class="logo_text"></span>
-                            </a>
-                        </div>
-
-
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="footer_bar">
-            <div class="container">
-                <div class="row">
-                    <div class="col">
-                        <div class="copyright text-center">
-                            <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
-                            Copyright &copy;@DateTime.Now.Year Marc Sozynski | This template is made with <i class="fa fa-heart-o" aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank">Colorlib</a>
-                            <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
-                        </div>
-                    </div>
                 </div>
             </div>
         </div>
 
-    </footer>
+        <!-- Home Slider Navigation -->
+        <div class="home_slider_nav"><i class="fa fa-angle-right" aria-hidden="true"></i></div>
+
+    </div>
 </div>
 
 @*Get search results by artist or track*@
@@ -237,14 +130,14 @@
         $("#search_artist_button").click(function (e) {
             if ($("#search_artist_text").val() != "") {
                 e.preventDefault();
-                window.location.href = "/?artist=" + $("#search_artist_text").val();
+                window.location.href = "/Search?artist=" + $("#search_artist_text").val();
             }
         });
 
         $("#search_track_button").click(function (e) {
             if ($("#search_track_text").val() != "") {
                 e.preventDefault();
-                window.location.href = "/?track=" + $("#search_track_text").val();
+                window.location.href = "/Search?track=" + $("#search_track_text").val();
             }
         });
 
@@ -269,24 +162,3 @@
 <script src="Content/plugins/parallax-js-master/parallax.min.js"></script>
 <script src="Content/plugins/scrollTo/jquery.scrollTo.min.js"></script>
 <script src="Content/js/custom.js"></script>
-
-@*Use scroll effect if there are search results*@
-@if (Model.ArtistResults != null || Model.TrackResults != null)
-{
-    <!-- Scroll Down -->
-    <div class="scroll_down scroll_down_link" data-scroll-to=".tours" style="visibility: hidden;">
-        <a href="#" id="scroll_down_button"></a>
-        <div class="d-flex flex-row align-items-center justify-content-start">
-            <div>scroll down</div>
-            <div class="scroll_arrows d-flex flex-column align-items-start justify-content-start">
-                <img src="Content/images/arrow_down.png" alt="">
-                <img src="Content/images/arrow_down.png" alt="">
-            </div>
-        </div>
-    </div>
-    <script>
-        $(document).ready(function () {
-            $("#scroll_down_button").trigger("click");
-        });
-    </script>
-}

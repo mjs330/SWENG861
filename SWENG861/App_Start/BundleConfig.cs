@@ -35,7 +35,26 @@ namespace SWENG861
                       "~/Content/plugins/OwlCarousel2-2.3.4/owl.theme.default.css",
                       "~/Content/plugins/OwlCarousel2-2.3.4/animate.css",
                       "~/Content/styles/main_styles.css",
-                      "~/Content/styles/responsive.css"));
+                      "~/Content/styles/responsive.css"
+                      ));
+
+            bundles.Add(new StyleBundle("~/Content/colorlibcontact").Include(
+                        "~/Content/plugins/font-awesome-4.7.0/css/font-awesome.min.css",
+                        "~/Content/styles/contact.css",
+                        "~/Content/styles/contact_responsive.css"
+                      ));
+
+            bundles.Add(new StyleBundle("~/Content/colorlibsearch").Include(
+                        "~/Content/plugins/font-awesome-4.7.0/css/font-awesome.min.css",
+                        "~/Content/plugins/OwlCarousel2-2.3.4/owl.carousel.css",
+                        "~/Content/plugins/OwlCarousel2-2.3.4/owl.theme.default.css",
+                        "~/Content/plugins/OwlCarousel2-2.3.4/animate.css",
+                        "~/Content/styles/main_styles.css",
+                        "~/Content/styles/artists.css",
+                        "~/Content/styles/artists_responsive.css"
+              ));
+
+
         }
     }
 }
