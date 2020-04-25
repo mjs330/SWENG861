@@ -1,6 +1,6 @@
 ﻿@Styles.Render("~/Content/colorlibcontact")
 @{
-    ViewBag.Title = "Contact";
+    ViewBag.Title = "About";
 }
 
 <!-- Header -->
@@ -23,8 +23,7 @@
                     <nav class="main_nav">
                         <ul class="d-flex flex-row align-items-center justify-content-start">
                             <li><a href="/">Search</a></li>
-                            <li><a href="/Contact">Contact</a></li>
-                            <li class="active"><a href="/About">About</a></liclass="active">
+                            <li class="active"><a href="/About">About</a></li>
                         </ul>
                     </nav>
 
@@ -44,7 +43,6 @@
             <nav class="menu_nav">
                 <ul class="d-flex flex-column align-items-center justify-content-start">
                     <li class="active"><a href="index.html">Search</a></li>
-                    <li><a href="/Contact">Contact</a></li>
                     <li><a href="/About">About</a></li>
                 </ul>
             </nav>
@@ -78,17 +76,23 @@
             <!-- Contact Content -->
             <div class="col-lg-12 text-center">
                 <div class="contact_content">
-                    <div class="contact_title">About</div>
+                    @*<div class="contact_title">About</div>*@
                     <div class="contact_text">
-                        <p>This is a project for SWENG 837.</p>
+                        <p>This <a href="https://dotnet.microsoft.com/apps/aspnet/mvc" target="_blank">ASP.NET MVC</a> web application is a project for <a href="https://bulletins.psu.edu/search/?caturl=%2Fsearch&search=sweng+837" target="_blank">SWENG837</a> taken at <a href="https://www.psu.edu/ target="_blank"">Penn State</a> during the Spring 2020 semester.</p>
+                        <p>
+                            It provides a front end for searching the <a href="https://developer.spotify.com/documentation/web-api/ target="_blank"">Spotify Web API</a> by artist or track.
+                            <br />
+                            It accomplishes this through the use of the <a href="https://www.nuget.org/packages/SpotifyAPI.Web/5.1.0?_src=template target="_blank"">SpotifyAPI.Web</a> .NET library and a <a href="https://colorlib.com/wp/template/music-2/" target="_blank">Colorlib</a> site design.
+                        </p>
                     </div>
                 </div>
             </div>
 
         </div>
+        
     </div>
-</div>
 
+</div>
 
 @*<script src="Content/js/jquery-3.3.1.min.js"></script>
     <script src="Content/styles/bootstrap-4.1.2/popper.js"></script>
