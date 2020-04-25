@@ -53,25 +53,52 @@
 <!-- Home -->
 
 <div class="home">
-    <div class="parallax_background parallax-window" data-parallax="scroll" data-image-src="Content/images/artists.jpg" data-speed="0.8"></div>
-    <div class="home_container">
-        <div class="container">
-            <div class="row">
-                <div class="col">
-                    <div class="home_content text-center">
-                        @if (Model.ArtistResults != null)
-                        {
-                            <div class="home_title">Search Artist</div>
-                        }
-                        @if (Model.TrackResults != null)
-                        {
-                            <div class="home_title">Search Track</div>
-                        }
+
+    <div class="home_slider_container">
+        <div class="owl-carousel owl-theme home_slider">
+
+            <!-- Slide -->
+            <div class="slide">
+
+                <div class="parallax_background parallax-window" data-parallax="scroll" data-image-src="Content/images/artists.jpg" data-speed="0.8"></div>
+                <div class="home_container">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col">
+                                <div class="home_content text-center">
+                                    <div class="home_title">Search @(Model.TrackResults != null ? "Track" : "Artist")</div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
+
+            <!-- Slide -->
+            <div class="slide">
+
+                <div class="parallax_background parallax-window" data-parallax="scroll" data-image-src="Content/images/artists.jpg" data-speed="0.8"></div>
+                <div class="home_container">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col">
+                                <div class="home_content text-center">
+                                    <div class="home_title">Search @(Model.TrackResults != null ? "Track" : "Artist")</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
         </div>
+        <!-- Home Slider Navigation -->
+        <div class="home_slider_nav"><i class="fa fa-angle-right" aria-hidden="true"></i></div>
     </div>
+
+
+
 </div>
 
 
@@ -86,16 +113,8 @@
                     <div class="search_form_container">
                         <form action="#" class="search_form" id="search_form">
                             <div class="d-flex flex-md-row flex-column align-items-center justify-content-between">
-                                @if (Model.ArtistResults != null)
-                                {
-                                    <input type="text" class="search_input" id="search_artist_text" value="@ViewBag.Query" placeholder="Enter Artist" required="required">
-                                    <button class="button search_button" id="search_artist_button"><span>search artist</span></button>
-                                }
-                                @if (Model.TrackResults != null)
-                                {
-                                    <input type="text" class="search_input" id="search_track_text" value="@ViewBag.Query" placeholder="Enter Track" required="required">
-                                    <button class="button search_button" id="search_track_button"><span>search track</span></button>
-                                }
+                                <input type="text" class="search_input" id="search_text" value="@(ViewBag != null ? ViewBag.Query : "")" placeholder="Enter @(Model.TrackResults != null ? "track" : "artist")" required="required">
+                                <button class="button search_button" id="search_button"><span id="search_button_text">search @(Model.TrackResults != null ? "track" : "artist")</span></button> 
                             </div>
                         </form>
                     </div>
@@ -225,29 +244,32 @@
     <br /><br /><br /><br />
 }
 
-@*Get search results by artist or track*@
+
 <script>
     $(document).ready(function () {
-        $("#search_artist_button").click(function (e) {
-            if ($("#search_artist_text").val() != "") {
+        @* Get search results by artist or track *@
+        $("#search_button").click(function (e) {
+            if ($("#search_text").val() != "") {
                 e.preventDefault();
-                window.location.href = "/Search?artist=" + $("#search_artist_text").val();
+                if ($("#search_button").text() == 'search artist')
+                    window.location.href = "/Search?artist=" + $("#search_text").val();
+                else
+                    window.location.href = "/Search?track=" + $("#search_text").val();
             }
         });
+        $("#search_text").change(function () {
+            $("#search_text").val(this.value);
+        });
 
-        $("#search_track_button").click(function (e) {
-            if ($("#search_track_text").val() != "") {
-                e.preventDefault();
-                window.location.href = "/Search?track=" + $("#search_track_text").val();
+        @* Swap artist and track when triggered by the slider button *@
+        $(".home_slider_nav").click(function () {
+            if ($("#search_button").text() == 'search artist') {
+                $("#search_button_text").html('search track');
+                $("#search_text").attr("placeholder", "Enter Track");
+            } else {
+                $("#search_button_text").html('search artist');
+                $("#search_text").html("placeholder", "Enter Artist");
             }
-        });
-
-        $("#search_artist_text").change(function () {
-            $("#search_artist_text").val(this.value);
-        });
-
-        $("#search_track_text").change(function () {
-            $("#search_track_text").val(this.value);
         });
     });
 </script>
@@ -268,3 +290,4 @@
 <script src="Content/plugins/parallax-js-master/parallax.min.js"></script>
 <script src="Content/plugins/scrollTo/jquery.scrollTo.min.js"></script>
 <script src="Content/js/artists.js"></script>
+<script src="Content/js/custom.js"></script>
