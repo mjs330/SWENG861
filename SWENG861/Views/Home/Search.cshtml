@@ -181,15 +181,11 @@
                                                         </p>
                                                     }
                                                 </div>
-                                                @if (ViewBag != null && !string.IsNullOrEmpty(ViewBag.Query))
-                                                {
-                                                    <div class="artist_store d-flex flex-row align-items-start justify-content-start flex-wrap">
-                                                        <div class="store"><a href="https://open.spotify.com/artist/@(result.Id)" target="_blank"><img src="Content/images/spotify.png"></a></div>
-                                                        <div class="store"><a href="https://music.apple.com/us/search?term=@(ViewBag.Query)" target="_blank"><img src="Content/images/appstore.png"></a></div>
-                                                        <div class="store"><a href="https://play.google.com/store/search?q=@(ViewBag.Query)&c=music" target="_blank"><img src="/Content/images/googleplay.png"></a></div>
-                                                    </div>
-                                                }
-
+                                                <div class="artist_store d-flex flex-row align-items-start justify-content-start flex-wrap">
+                                                    <div class="store"><a href="https://open.spotify.com/artist/@(result.Id)" target="_blank"><img src="Content/images/spotify.png"></a></div>
+                                                    <div class="store"><a href="https://music.apple.com/us/search?term=@(result.Name)" target="_blank"><img src="Content/images/appstore.png"></a></div>
+                                                    <div class="store"><a href="https://play.google.com/store/search?q=@(result.Name)&c=music" target="_blank"><img src="/Content/images/googleplay.png"></a></div>
+                                                </div>
                                             </div>
 
                                         </div>
@@ -235,14 +231,11 @@
                                                     }
                                                     <p><strong>Released</strong> @result.ReleaseDate</p>
                                                 </div>
-                                                @if (ViewBag != null && !string.IsNullOrEmpty(ViewBag.Query))
-                                                {
-                                                    <div class="artist_store d-flex flex-row align-items-start justify-content-start flex-wrap">
-                                                        <div class="store"><a href="https://open.spotify.com/track/@(result.Id)" target="_blank"><img src="Content/images/spotify.png"></a></div>
-                                                        <div class="store"><a href="https://music.apple.com/us/search?term=@(ViewBag.Query)" target="_blank"><img src="Content/images/appstore.png"></a></div>
-                                                        <div class="store"><a href="https://play.google.com/store/search?q=@(ViewBag.Query)&c=music" target="_blank"><img src="/Content/images/googleplay.png"></a></div>
-                                                    </div>
-                                                }
+                                                <div class="artist_store d-flex flex-row align-items-start justify-content-start flex-wrap">
+                                                    <div class="store"><a href="https://open.spotify.com/track/@(result.Id)" target="_blank"><img src="Content/images/spotify.png"></a></div>
+                                                    <div class="store"><a href="https://music.apple.com/us/search?term=@(result.Title)" target="_blank"><img src="Content/images/appstore.png"></a></div>
+                                                    <div class="store"><a href="https://play.google.com/store/search?q=@(result.Title)&c=music" target="_blank"><img src="/Content/images/googleplay.png"></a></div>
+                                                </div>
                                             </div>
 
                                         </div>
