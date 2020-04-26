@@ -159,6 +159,7 @@
     <Content Include="Content\bootstrap-reboot.min.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\images\spotify.png" />
     <Content Include="Content\js\jquery-3.3.1.min.js" />
     <Content Include="Content\styles\bootstrap-4.1.2\bootstrap.min.css" />
     <Content Include="Content\styles\bootstrap-4.1.2\bootstrap.min.js" />

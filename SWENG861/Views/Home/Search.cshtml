@@ -83,7 +83,7 @@
                         <div class="row">
                             <div class="col">
                                 <div class="home_content text-center">
-                                    <div class="home_title">Search @(Model.TrackResults != null ? "Track" : "Artist")</div>
+                                    <div class="home_title">Search @(Model.TrackResults != null ? "Artist" : "Track")</div>
                                 </div>
                             </div>
                         </div>
@@ -180,8 +180,16 @@
                                                             }
                                                         </p>
                                                     }
-                                                    <p><a href="@("https://open.spotify.com/artist/" + result.Id)" target="_blank"><strong>Listen on Spotify</strong></a></p>
                                                 </div>
+                                                @if (ViewBag != null && !string.IsNullOrEmpty(ViewBag.Query))
+                                                {
+                                                    <div class="artist_store d-flex flex-row align-items-start justify-content-start flex-wrap">
+                                                        <div class="store"><a href="https://open.spotify.com/artist/@(result.Id)" target="_blank"><img src="Content/images/spotify.png"></a></div>
+                                                        <div class="store"><a href="https://music.apple.com/us/search?term=@(ViewBag.Query)" target="_blank"><img src="Content/images/appstore.png"></a></div>
+                                                        <div class="store"><a href="https://play.google.com/store/search?q=@(ViewBag.Query)&c=music" target="_blank"><img src="/Content/images/googleplay.png"></a></div>
+                                                    </div>
+                                                }
+
                                             </div>
 
                                         </div>
@@ -209,7 +217,7 @@
                                     <div class="col-lg-6 artist_col">
                                         <div class="artist_content">
                                             <div class="artist_info">
-                                                <div class="artist_name"><h1><a href="/Artist/@result.Id">@result.Title</a></h1></div>
+                                                <div class="artist_name"><h1><a href="/Search?track=@result.Title">@result.Title</a></h1></div>
                                                 <div class="artist_text">
                                                     @if (result.Artists != null)
                                                     {
@@ -226,8 +234,15 @@
                                                         </p>
                                                     }
                                                     <p><strong>Released</strong> @result.ReleaseDate</p>
-                                                    <p><a href="@("https://open.spotify.com/track/" + result.Id)" target="_blank"><strong>Listen on Spotify</strong></a></p>
                                                 </div>
+                                                @if (ViewBag != null && !string.IsNullOrEmpty(ViewBag.Query))
+                                                {
+                                                    <div class="artist_store d-flex flex-row align-items-start justify-content-start flex-wrap">
+                                                        <div class="store"><a href="https://open.spotify.com/track/@(result.Id)" target="_blank"><img src="Content/images/spotify.png"></a></div>
+                                                        <div class="store"><a href="https://music.apple.com/us/search?term=@(ViewBag.Query)" target="_blank"><img src="Content/images/appstore.png"></a></div>
+                                                        <div class="store"><a href="https://play.google.com/store/search?q=@(ViewBag.Query)&c=music" target="_blank"><img src="/Content/images/googleplay.png"></a></div>
+                                                    </div>
+                                                }
                                             </div>
 
                                         </div>
