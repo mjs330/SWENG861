@@ -2,8 +2,7 @@
 
 This ASP.NET MVC web application is a project for SWENG837 taken at Penn State during the Spring 2020 semester.
 
-It provides a front end for searching the Spotify Web API by artist or track.
-It accomplishes this through the use of the SpotifyAPI.Web .NET library and a ColorLib site design.
+It provides a front end for searching the Spotify Web API by artist or track. It accomplishes this through the use of the SpotifyAPI.Web .NET library and a ColorLib site design.
 
 ## Usage
 
@@ -23,4 +22,4 @@ Once the web site starts, enter a search value and click search. Track and artis
 
 * [Spotify Web API](https://developer.spotify.com/documentation/web-api/)
 
-* [SpotifyAPI.Web](https://www.nuget.org/packages/SpotifyAPI.Web/5.1.0?_src=template)
+* [SpotifyAPI.Web](https://www.nuget.org/packages/SpotifyAPI.Web/5.1.0)
