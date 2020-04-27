@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.Specialized;
+using System.Configuration;
 using System.Linq;
 using System.Net;
 using System.Text;
@@ -51,6 +52,7 @@ namespace SWENG861.Models
     {
         public List<ArtistDetails> ArtistResults = null;
         public List<TrackDetails> TrackResults = null;
+        public bool GetMinimumArtistResults = ConfigurationManager.AppSettings["GetMinimumArtistResults"] != null ? bool.Parse(ConfigurationManager.AppSettings["GetMinimumArtistResults"]) : false;
     }
 
     /// <summary>

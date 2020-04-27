@@ -102,155 +102,166 @@
 </div>
 
 
-@if (Model.ArtistResults != null || Model.TrackResults != null)
-{
-    <!-- Search -->
+<!-- Search -->
 
-    <div class="search">
-        <div class="container">
-            <div class="row">
-                <div class="col">
-                    <div class="search_form_container">
-                        <form action="#" class="search_form" id="search_form">
-                            <div class="d-flex flex-md-row flex-column align-items-center justify-content-between">
-                                <input type="text" class="search_input" id="search_text" value="@(ViewBag != null ? ViewBag.Query : "")" placeholder="Enter @(Model.TrackResults != null ? "track" : "artist")" required="required">
-                                <button class="button search_button" id="search_button"><span id="search_button_text">search @(Model.TrackResults != null ? "track" : "artist")</span></button> 
+<div class="search">
+    <div class="container">
+        <div class="row">
+            <div class="col">
+                <div class="search_form_container">
+                    <form action="#" class="search_form" id="search_form">
+                        <div class="d-flex flex-md-row flex-column align-items-center justify-content-between">
+                            <input type="text" class="search_input" id="search_text" value="@(ViewBag != null ? ViewBag.Query : "")" placeholder="Enter @(Model.TrackResults != null ? "Track" : "Artist")" required="required">
+                            <button class="button search_button" id="search_button"><span id="search_button_text">search @(Model.TrackResults != null ? "track" : "artist")</span></button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="artists_container">
+    <div class="container">
+        <div class="row">
+            <div class="col">
+                @*Display artist results if they exist*@
+                @if (Model.ArtistResults != null && Model.ArtistResults.Count > 0)
+                {
+                    foreach (var result in Model.ArtistResults)
+                    {
+                        <!-- Artist -->
+                        <div class="artist">
+                            <div class="row">
+
+                                <!-- Artist Image -->
+                                <div class="col-lg-6">
+                                    <div class="artist_image"><img width="600" height="400" style="object-fit: cover;" src="@(!string.IsNullOrEmpty(result.ImageUrl) ? result.ImageUrl : "Content/images/artist_1.jpg")" alt="@result.Name"></div>
+                                </div>
+
+                                <!-- Artist Content -->
+                                <div class="col-lg-6 artist_col">
+                                    <div class="artist_content">
+                                        <div class="artist_info">
+                                            <div class="artist_name"><h1><a href="/Search?artist=@result.Name">@result.Name</a></h1></div>
+                                            <div class="artist_text">
+                                                @if (result.Genres != null && result.Genres.Count > 0)
+                                                {
+                                                    <p>
+                                                        <strong>Genres</strong> @string.Join(", ", result.Genres)
+                                                    </p>
+                                                }
+                                                @if (result.RelatedArtists != null && result.RelatedArtists.Count > 0)
+                                                {
+                                                    <p>
+                                                        <strong>Related Artists</strong>
+                                                        @foreach (var artist in result.RelatedArtists)
+                                                        {
+                                                            <a href="/Search?artist=@artist.Name">@artist.Name</a>
+                                                            if (artist != result.RelatedArtists.Last())
+                                                            {
+                                                                <span>, </span>
+                                                            }
+                                                        }
+                                                    </p>
+                                                }
+                                                @if (result.TopTracks != null && result.TopTracks.Count > 0)
+                                                {
+                                                    <p>
+                                                        <strong>Top Tracks</strong>
+                                                        @foreach (var track in result.TopTracks)
+                                                        {
+                                                            <a href="/Search?track=@track.Title">@track.Title</a>
+                                                            if (track != result.TopTracks.Last())
+                                                            {
+                                                                <span>, </span>
+                                                            }
+                                                        }
+                                                    </p>
+                                                }
+                                            </div>
+                                            <div class="artist_store d-flex flex-row align-items-start justify-content-start flex-wrap">
+                                                <div class="store"><a href="https://open.spotify.com/artist/@(result.Id)" target="_blank"><img src="Content/images/spotify.png"></a></div>
+                                                <div class="store"><a href="https://music.apple.com/us/search?term=@(result.Name)" target="_blank"><img src="Content/images/appstore.png"></a></div>
+                                                <div class="store"><a href="https://play.google.com/store/search?q=@(result.Name)&c=music" target="_blank"><img src="/Content/images/googleplay.png"></a></div>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                </div>
+
                             </div>
-                        </form>
+                        </div>
+                    }
+                }
+                @*Display track results if they exist*@
+                else if (Model.TrackResults != null && Model.TrackResults.Count > 0)
+                {
+                    foreach (var result in Model.TrackResults)
+                    {
+                        <!-- Artist -->
+                        <div class="artist">
+                            <div class="row">
+
+                                <!-- Artist Image -->
+                                <div class="col-lg-6">
+                                    <div class="artist_image"><img width="600" height="400" style="object-fit: cover;" src="@(!string.IsNullOrEmpty(result.ImageUrl) ? result.ImageUrl : "Content/images/artist_1.jpg")" alt="@result.Title"></div>
+                                </div>
+
+                                <!-- Artist Content -->
+                                <div class="col-lg-6 artist_col">
+                                    <div class="artist_content">
+                                        <div class="artist_info">
+                                            <div class="artist_name"><h1><a href="/Search?track=@result.Title">@result.Title</a></h1></div>
+                                            <div class="artist_text">
+                                                @if (result.Artists != null)
+                                                {
+                                                    <p>
+                                                        <strong>By</strong>
+                                                        @foreach (var artist in result.Artists)
+                                                        {
+                                                            <a href="/Search?artist=@artist.Name">@artist.Name</a>
+                                                            if (artist != result.Artists.Last())
+                                                            {
+                                                                <span>, </span>
+                                                            }
+                                                        }
+                                                    </p>
+                                                }
+                                                <p><strong>Released</strong> @result.ReleaseDate</p>
+                                                @if (result.Explicit)
+                                                {
+                                                    <p>Explicit Lyrics</p>
+                                                    
+                                                }
+                                            </div>
+                                            <div class="artist_store d-flex flex-row align-items-start justify-content-start flex-wrap">
+                                                <div class="store"><a href="https://open.spotify.com/track/@(result.Id)" target="_blank"><img src="Content/images/spotify.png"></a></div>
+                                                <div class="store"><a href="https://music.apple.com/us/search?term=@(result.Title)" target="_blank"><img src="Content/images/appstore.png"></a></div>
+                                                <div class="store"><a href="https://play.google.com/store/search?q=@(result.Title)&c=music" target="_blank"><img src="/Content/images/googleplay.png"></a></div>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                    }
+                }
+                @*Display no results message by default*@
+                else
+                {
+                    <div class="artist">
+                        <div class="artist_name text-center"><h1>No Results Found</h1></div>
                     </div>
-                </div>
+                }
             </div>
         </div>
     </div>
-
-    <div class="artists_container">
-        <div class="container">
-            <div class="row">
-                <div class="col">
-                    @if (Model.ArtistResults != null)
-                    {
-                        foreach (var result in Model.ArtistResults)
-                        {
-                            <!-- Artist -->
-                            <div class="artist">
-                                <div class="row">
-
-                                    <!-- Artist Image -->
-                                    <div class="col-lg-6">
-                                        <div class="artist_image"><img width="600" height="400" style="object-fit: cover;" src="@(!string.IsNullOrEmpty(result.ImageUrl) ? result.ImageUrl : "Content/images/artist_1.jpg")" alt="@result.Name"></div>
-                                    </div>
-
-                                    <!-- Artist Content -->
-                                    <div class="col-lg-6 artist_col">
-                                        <div class="artist_content">
-                                            <div class="artist_info">
-                                                <div class="artist_name"><h1><a href="/Search?artist=@result.Name">@result.Name</a></h1></div>
-                                                <div class="artist_text">
-                                                    @if (result.Genres != null && result.Genres.Count > 0)
-                                                    {
-                                                        <p>
-                                                            <strong>Genres</strong> @string.Join(", ", result.Genres)
-                                                        </p>
-                                                    }
-                                                    @if (result.RelatedArtists != null && result.RelatedArtists.Count > 0)
-                                                    {
-                                                        <p>
-                                                            <strong>Related Artists</strong>
-                                                            @foreach (var artist in result.RelatedArtists)
-                                                            {
-                                                                <a href="/Search?artist=@artist.Name">@artist.Name</a>
-                                                                if (artist != result.RelatedArtists.Last())
-                                                                {
-                                                                    <span>, </span>
-                                                                }
-                                                            }
-                                                        </p>
-                                                    }
-                                                    @if (result.TopTracks != null && result.TopTracks.Count > 0)
-                                                    {
-                                                        <p>
-                                                            <strong>Top Tracks</strong>
-                                                            @foreach (var track in result.TopTracks)
-                                                            {
-                                                                <a href="/Search?track=@track.Title">@track.Title</a>
-                                                                if (track != result.TopTracks.Last())
-                                                                {
-                                                                    <span>, </span>
-                                                                }
-                                                            }
-                                                        </p>
-                                                    }
-                                                </div>
-                                                <div class="artist_store d-flex flex-row align-items-start justify-content-start flex-wrap">
-                                                    <div class="store"><a href="https://open.spotify.com/artist/@(result.Id)" target="_blank"><img src="Content/images/spotify.png"></a></div>
-                                                    <div class="store"><a href="https://music.apple.com/us/search?term=@(result.Name)" target="_blank"><img src="Content/images/appstore.png"></a></div>
-                                                    <div class="store"><a href="https://play.google.com/store/search?q=@(result.Name)&c=music" target="_blank"><img src="/Content/images/googleplay.png"></a></div>
-                                                </div>
-                                            </div>
-
-                                        </div>
-                                    </div>
-
-                                </div>
-                            </div>
-                        }
-                    }
-
-                    @if (Model.TrackResults != null)
-                    {
-                        foreach (var result in Model.TrackResults)
-                        {
-                            <!-- Artist -->
-                            <div class="artist">
-                                <div class="row">
-
-                                    <!-- Artist Image -->
-                                    <div class="col-lg-6">
-                                        <div class="artist_image"><img width="600" height="400" style="object-fit: cover;" src="@(!string.IsNullOrEmpty(result.ImageUrl) ? result.ImageUrl : "Content/images/artist_1.jpg")" alt="@result.Title"></div>
-                                    </div>
-
-                                    <!-- Artist Content -->
-                                    <div class="col-lg-6 artist_col">
-                                        <div class="artist_content">
-                                            <div class="artist_info">
-                                                <div class="artist_name"><h1><a href="/Search?track=@result.Title">@result.Title</a></h1></div>
-                                                <div class="artist_text">
-                                                    @if (result.Artists != null)
-                                                    {
-                                                        <p>
-                                                            <strong>By</strong>
-                                                            @foreach (var artist in result.Artists)
-                                                            {
-                                                                <a href="/Search?artist=@artist.Name">@artist.Name</a>
-                                                                if (artist != result.Artists.Last())
-                                                                {
-                                                                    <span>, </span>
-                                                                }
-                                                            }
-                                                        </p>
-                                                    }
-                                                    <p><strong>Released</strong> @result.ReleaseDate</p>
-                                                </div>
-                                                <div class="artist_store d-flex flex-row align-items-start justify-content-start flex-wrap">
-                                                    <div class="store"><a href="https://open.spotify.com/track/@(result.Id)" target="_blank"><img src="Content/images/spotify.png"></a></div>
-                                                    <div class="store"><a href="https://music.apple.com/us/search?term=@(result.Title)" target="_blank"><img src="Content/images/appstore.png"></a></div>
-                                                    <div class="store"><a href="https://play.google.com/store/search?q=@(result.Title)&c=music" target="_blank"><img src="/Content/images/googleplay.png"></a></div>
-                                                </div>
-                                            </div>
-
-                                        </div>
-                                    </div>
-
-                                </div>
-                            </div>
-                        }
-                    }
-                </div>
-            </div>
-        </div>
-    </div>
-    <br /><br /><br /><br />
-}
+</div>
+<br /><br /><br /><br />
 
 
 <script>
@@ -260,7 +271,7 @@
             if ($("#search_text").val() != "") {
                 e.preventDefault();
                 if ($("#search_button").text() == 'search artist')
-                    window.location.href = "/Search?artist=" + $("#search_text").val();
+                    window.location.href = "/Search?artist=" + $("#search_text").val() + "&min=@(Model.GetMinimumArtistResults.ToString().ToLower())";
                 else
                     window.location.href = "/Search?track=" + $("#search_text").val();
             }
@@ -276,7 +287,7 @@
                 $("#search_text").attr("placeholder", "Enter Track");
             } else {
                 $("#search_button_text").html('search artist');
-                $("#search_text").html("placeholder", "Enter Artist");
+                $("#search_text").attr("placeholder", "Enter Artist");
             }
         });
     });

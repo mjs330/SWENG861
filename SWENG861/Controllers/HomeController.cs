@@ -22,7 +22,7 @@ namespace SWENG861.Controllers
             }
             catch (Exception Ex)
             {
-                // Write error to the log and return a 500 error to the browser
+                // Write error to the console and return a 500 error to the browser
                 Console.WriteLine("Exception Occurred: " + Ex.Message);
                 return new HttpStatusCodeResult((int)HttpStatusCode.InternalServerError);
             }
@@ -65,7 +65,7 @@ namespace SWENG861.Controllers
             }
             catch (Exception Ex)
             {
-                // Write error to the log and return a 500 error to the browser
+                // Write error to the console and return a 500 error to the browser
                 Console.WriteLine("Exception Occurred: " + Ex.Message);
                 return new HttpStatusCodeResult((int)HttpStatusCode.InternalServerError);
             }
@@ -73,7 +73,16 @@ namespace SWENG861.Controllers
 
         public ActionResult About()
         {
-            return View();
+            try
+            {
+                return View();
+            }
+            catch (Exception Ex)
+            {
+                // Write error to the console and return a 500 error to the browser
+                Console.WriteLine("Exception Occurred: " + Ex.Message);
+                return new HttpStatusCodeResult((int)HttpStatusCode.InternalServerError);
+            }
         }
 
 

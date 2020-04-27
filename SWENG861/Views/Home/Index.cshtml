@@ -74,7 +74,7 @@
                                         <form action="#" class="tickets_form">
                                             <div class="d-flex flex-md-row flex-column align-items-start justify-content-md-between justify-content-start">
                                                 <div class="tickets_form_inputs d-flex flex-row align-items-start justify-content-between">
-                                                    <input type="text" class="tickets_form_input" id="search_artist_text" placeholder="Enter Artist">
+                                                    <input type="text" class="tickets_form_input" id="search_artist_text" placeholder="Enter Artist" required="required">
                                                 </div>
                                                 <button class="tickets_form_button button" id="search_artist_button"><span>Search Artist</span></button>
                                             </div>
@@ -128,7 +128,7 @@
         $("#search_artist_button").click(function (e) {
             if ($("#search_artist_text").val() != "") {
                 e.preventDefault();
-                window.location.href = "/Search?artist=" + $("#search_artist_text").val();
+                window.location.href = "/Search?artist=" + $("#search_artist_text").val() + "&min=@(Model.GetMinimumArtistResults.ToString().ToLower())";
             }
         });
 
