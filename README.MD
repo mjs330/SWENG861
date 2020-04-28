@@ -10,7 +10,7 @@ Open the SWENG861.sln file in [Visual Studio](https://visualstudio.microsoft.com
 
 Once the web site starts, enter a search value and click search. Track and artist search may be toggled by clicking on the arrow on the right of the screen.
 
-Use the following setting within <appSettings> in web.config to toggle whether minimum or full artist search results are retrieved. Full track search results are always retrieved.
+Use the following setting within appSettings in web.config to toggle whether minimum or full artist search results are retrieved. Full track search results are always retrieved.
 
 ```xml
 <appSettings>
