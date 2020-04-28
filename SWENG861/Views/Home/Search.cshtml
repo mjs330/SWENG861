@@ -129,6 +129,13 @@
                 @*Display artist results if they exist*@
                 @if (Model.ArtistResults != null && Model.ArtistResults.Count > 0)
                 {
+                    <div class="artist">
+                        <div class="row">
+                            <div class="col-lg-12 artist_col">
+                                <div class="artist_text text-center"><p>Top Results For "@ViewBag.Query"</p></div>
+                            </div>
+                        </div>
+                    </div>
                     foreach (var result in Model.ArtistResults)
                     {
                         <!-- Artist -->
@@ -193,11 +200,19 @@
 
                             </div>
                         </div>
+                        <br />
                     }
                 }
                 @*Display track results if they exist*@
                 else if (Model.TrackResults != null && Model.TrackResults.Count > 0)
                 {
+                    <div class="artist">
+                        <div class="row">
+                            <div class="col-lg-12 artist_col">
+                                <div class="artist_text text-center"><p>Top Results For "@ViewBag.Query"</p></div>
+                            </div>
+                        </div>
+                    </div>
                     foreach (var result in Model.TrackResults)
                     {
                         <!-- Artist -->
@@ -233,7 +248,7 @@
                                                 @if (result.Explicit)
                                                 {
                                                     <p>Explicit Lyrics</p>
-                                                    
+
                                                 }
                                             </div>
                                             <div class="artist_store d-flex flex-row align-items-start justify-content-start flex-wrap">
@@ -248,20 +263,25 @@
 
                             </div>
                         </div>
+                        <br />
                     }
                 }
                 @*Display no results message by default*@
                 else
                 {
                     <div class="artist">
-                        <div class="artist_name text-center"><h1>No Results Found</h1></div>
+                        <div class="row">
+                            <div class="col-lg-12 artist_col">
+                                <div class="artist_text text-center"><p>No Results Found For "@ViewBag.Query"</p></div>
+                            </div>
+                        </div>
                     </div>
                 }
             </div>
         </div>
     </div>
 </div>
-<br /><br /><br /><br />
+<br /><br /><br />
 
 
 <script>
