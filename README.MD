@@ -1,6 +1,6 @@
 ## About
 
-This ASP.NET MVC web application is a project for SWENG837 taken at Penn State during the Spring 2020 semester.
+This ASP.NET MVC web application is a project for SWENG861 taken at Penn State during the Spring 2020 semester.
 
 It provides a front end for searching the Spotify Web API by artist or track and displaying the top results. It accomplishes this through the use of the SpotifyAPI.Web .NET library and a ColorLib site design.
 
