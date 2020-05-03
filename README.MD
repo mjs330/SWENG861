@@ -18,6 +18,8 @@ Use the following setting within appSettings in web.config to toggle whether min
 </appSettings>
 ```
 
+Search results contain links to Spotify, Apple App Store, and Google Play. The link to Spotify is a direct link to the artist or track based on its Spotify ID while the links to Apple App Store and Google Play conduct searches on those platforms for the artist or track.
+
 ## Credits
 
 * [ASP.NET MVC](https://dotnet.microsoft.com/apps/aspnet/mvc)
