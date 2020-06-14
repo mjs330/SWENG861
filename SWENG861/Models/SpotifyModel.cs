@@ -77,8 +77,8 @@ namespace SWENG861.Models
     public class SpotifyCredentials
     {
         // Store Spotify client ID and client secret
-        private static readonly string ClientID = "***REMOVED***";
-        private static readonly string ClientSecret = "***REMOVED***";
+        private static readonly string ClientID = ConfigurationManager.AppSettings["ClientID"];
+        private static readonly string ClientSecret = ConfigurationManager.AppSettings["ClientSecret"];
 
         public Token Token = null;
 

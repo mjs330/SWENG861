@@ -6,15 +6,24 @@ It provides a front end for searching the Spotify Web API by artist or track and
 
 ## Usage
 
+Open the web.config file and fill in the following with your [Spotify Web API](https://developer.spotify.com/documentation/web-api/) ClientID and ClientSecret.
+
+```xml
+<appSettings>
+	<add key="ClientID" value="" />
+	<add key="ClientSecret" value="" />
+</appSettings>
+```
+
 Open the SWENG861.sln file in [Visual Studio](https://visualstudio.microsoft.com/vs/) (preferably 2019) and click on the green run button at the top of the screen.
 
 Once the web site starts, enter a search value and click search. Track and artist search may be toggled by clicking on the arrow on the right of the screen.
 
-Use the following setting within appSettings in web.config to toggle whether minimum or full artist search results are retrieved. Full track search results are always retrieved.
+By default, full artist and track search results are retrieved. If any lag is experienced when retrieving full artist results, the following setting can be used to switch to minimum artist results:
 
 ```xml
 <appSettings>
-	<add key="GetMinimumArtistResults" value="false" />
+	<add key="GetMinimumArtistResults" value="true" />
 </appSettings>
 ```
 
